@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gymale – House of Jawara | Gym Khusus Pria Surabaya</title>
+
+  <!-- ═══════════════════════════════════════════════
+       TAILWIND CSS via CDN
+  ═══════════════════════════════════════════════ -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- ═══════════════════════════════════════════════
+       GOOGLE FONTS – Bebas Neue (display) + Barlow Condensed (body)
+  ═══════════════════════════════════════════════ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ═══════════════════════════════════════════════
+       TAILWIND CONFIG
+  ═══════════════════════════════════════════════ -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            neon: '#00E5FF',
+            charcoal: '#1E1E1E',
+            'charcoal-light': '#252525',
+            'charcoal-card': '#2A2A2A',
+          },
+          fontFamily: {
+            display: ['Bebas Neue', 'sans-serif'],
+            body: ['Barlow Condensed', 'sans-serif'],
+          },
+          boxShadow: {
+            neon: '0 0 12px #00E5FF, 0 0 30px rgba(0,229,255,0.35)',
+            'neon-lg': '0 0 20px #00E5FF, 0 0 60px rgba(0,229,255,0.4)',
+            'neon-sm': '0 0 6px #00E5FF, 0 0 14px rgba(0,229,255,0.25)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- ═══════════════════════════════════════════════
+       GLOBAL STYLES
+  ═══════════════════════════════════════════════ -->
+  <style>
+    /* ---------- Base ---------- */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #1E1E1E;
+      color: #E5E5E5;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      overflow-x: hidden;
+    }
+
+    /* ---------- Neon text glow ---------- */
+    .neon-text {
+      color: #00E5FF;
+      text-shadow: 0 0 8px #00E5FF, 0 0 20px rgba(0,229,255,0.5);
+    }
+
+    /* ---------- Neon border glow ---------- */
+    .neon-border {
+      border: 1px solid #00E5FF;
+      box-shadow: 0 0 8px rgba(0,229,255,0.3), inset 0 0 8px rgba(0,229,255,0.05);
+    }
+
+    /* ---------- Neon button ---------- */
+    .btn-neon {
+      background: #00E5FF;
+      color: #000;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.65rem 1.75rem;
+      border-radius: 2px;
+      transition: box-shadow 0.25s, transform 0.15s;
+    }
+    .btn-neon:hover {
+      box-shadow: 0 0 18px #00E5FF, 0 0 50px rgba(0,229,255,0.45);
+      transform: translateY(-1px);
+    }
+
+    /* ---------- Outline neon button ---------- */
+    .btn-outline-neon {
+      border: 1.5px solid #00E5FF;
+      color: #00E5FF;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.4rem;
+      border-radius: 2px;
+      background: transparent;
+      transition: background 0.2s, box-shadow 0.25s, transform 0.15s;
+    }
+    .btn-outline-neon:hover {
+      background: rgba(0,229,255,0.08);
+      box-shadow: 0 0 14px rgba(0,229,255,0.4);
+      transform: translateY(-1px);
+    }
+
+    /* ---------- Hero overlay gradient ---------- */
+    .hero-overlay {
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.72) 0%,
+        rgba(30,30,30,0.55) 50%,
+        rgba(30,30,30,1) 100%
+      );
+    }
+
+    /* ---------- Diagonal section divider ---------- */
+    .clip-diagonal {
+      clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+    }
+
+    /* ---------- Facility card hover ---------- */
+    .facility-card {
+      background: #2A2A2A;
+      border: 1px solid rgba(0,229,255,0.12);
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    }
+    .facility-card:hover {
+      border-color: #00E5FF;
+      box-shadow: 0 0 20px rgba(0,229,255,0.2);
+      transform: translateY(-4px);
+    }
+
+    /* ---------- Coach card hover ---------- */
+    .coach-card {
+      background: linear-gradient(160deg, #2A2A2A 60%, #232323 100%);
+      border: 1px solid rgba(0,229,255,0.08);
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    }
+    .coach-card:hover {
+      border-color: #00E5FF;
+      box-shadow: 0 0 24px rgba(0,229,255,0.2);
+      transform: translateY(-5px);
+    }
+
+    /* ---------- Pricing card ---------- */
+    .pricing-card {
+      background: #232323;
+      border: 1px solid rgba(255,255,255,0.07);
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    }
+    .pricing-card:hover {
+      border-color: rgba(0,229,255,0.4);
+      box-shadow: 0 0 24px rgba(0,229,255,0.15);
+      transform: translateY(-4px);
+    }
+    .pricing-card.featured {
+      border-color: #00E5FF;
+      box-shadow: 0 0 30px rgba(0,229,255,0.25);
+    }
+
+    /* ---------- Noise texture overlay ---------- */
+    .noise::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      opacity: 0.03;
+    }
+
+    /* ---------- Scrollbar ---------- */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #1A1A1A; }
+    ::-webkit-scrollbar-thumb { background: #00E5FF; border-radius: 3px; }
+
+    /* ---------- Navbar scroll effect ---------- */
+    #navbar {
+      transition: background 0.35s, box-shadow 0.35s;
+    }
+    #navbar.scrolled {
+      background: rgba(20,20,20,0.97);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.6);
+    }
+
+    /* ---------- Entrance animations ---------- */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---------- Horizontal rule neon ---------- */
+    .neon-hr {
+      border: none;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #00E5FF, transparent);
+      opacity: 0.35;
+    }
+
+    /* ---------- Section label ---------- */
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #00E5FF;
+    }
+
+    /* ---------- Testimonial marquee ---------- */
+    .marquee-wrapper {
+      overflow: hidden;
+      position: relative;
+    }
+    .marquee-wrapper::before,
+    .marquee-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 120px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .marquee-wrapper::before {
+      left: 0;
+      background: linear-gradient(to right, #1E1E1E 0%, transparent 100%);
+    }
+    .marquee-wrapper::after {
+      right: 0;
+      background: linear-gradient(to left, #1E1E1E 0%, transparent 100%);
+    }
+    .marquee-track {
+      display: flex;
+      gap: 1.25rem;
+      width: max-content;
+    }
+    .marquee-track.left {
+      animation: marquee-left 60s linear infinite;
+    }
+    .marquee-track.right {
+      animation: marquee-right 60s linear infinite;
+    }
+    .marquee-wrapper:hover .marquee-track {
+      animation-play-state: paused;
+    }
+    @keyframes marquee-left {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes marquee-right {
+      0%   { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+    .testi-card-marquee {
+      background: #232323;
+      border: 1px solid rgba(0,229,255,0.08);
+      border-radius: 2px;
+      padding: 1.5rem;
+      flex-shrink: 0;
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+    .testi-card-marquee:hover {
+      border-color: rgba(0,229,255,0.4);
+      box-shadow: 0 0 20px rgba(0,229,255,0.12);
+    }
+
+    /* ---------- Find Us section ---------- */
+    .findus-map {
+      border: 1px solid rgba(0,229,255,0.15);
+      border-radius: 2px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(0,229,255,0.07);
+    }
+    .findus-social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      color: #9ca3af;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      transition: color 0.2s;
+      text-decoration: none;
+    }
+    .findus-social-link:hover { color: #00E5FF; }
+
+    /* ---------- Mobile menu ---------- */
+    #mobile-menu {
+      transition: max-height 0.35s ease, opacity 0.3s;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+    }
+    #mobile-menu.open {
+      max-height: 300px;
+      opacity: 1;
+    }
+
+    /* ---------- Testimonial card ---------- */
+    .testi-card {
+      background: #232323;
+      border: 1px solid rgba(0,229,255,0.08);
+      border-radius: 2px;
+      padding: 2rem;
+      position: relative;
+      cursor: default;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s, background 0.3s;
+      outline: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .testi-card:hover,
+    .testi-card:focus {
+      border-color: #00E5FF;
+      box-shadow: 0 0 28px rgba(0,229,255,0.18), 0 8px 32px rgba(0,0,0,0.4);
+      transform: translateY(-6px);
+      background: #272727;
+    }
+    .testi-card:active {
+      transform: translateY(-2px) scale(0.99);
+      box-shadow: 0 0 40px rgba(0,229,255,0.3), 0 4px 20px rgba(0,0,0,0.5);
+    }
+    .testi-quote {
+      font-family: Georgia, serif;
+      font-size: 4rem;
+      line-height: 0.7;
+      color: #00E5FF;
+      opacity: 0.25;
+      user-select: none;
+    }
+    .testi-card:hover .testi-quote,
+    .testi-card:focus .testi-quote {
+      opacity: 0.55;
+      transition: opacity 0.3s;
+    }
+    .testi-text {
+      color: #b0b0b0;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      line-height: 1.65;
+      flex: 1;
+    }
+    .testi-footer {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      margin-top: auto;
+    }
+    .testi-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(0,229,255,0.25);
+    }
+    .testi-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #e5e5e5;
+      letter-spacing: 0.04em;
+    }
+    .testi-role {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      color: #555;
+      letter-spacing: 0.04em;
+    }
+    .testi-stars {
+      color: #00E5FF;
+      font-size: 0.85rem;
+      margin-top: 2px;
+      text-shadow: 0 0 6px rgba(0,229,255,0.5);
+    }
+  </style>
+</head>
+
+<body class="antialiased">
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  NAVBAR                                                       ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-6 lg:px-16 py-4">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+
+    <!-- Logo -->
+    <a href="#hero" class="flex items-center gap-3 group">
+      <!-- Logo Image -->
+      <img src="./LOGO/Logo-gymmale.webp" alt="Gymale Logo" class="h-10 w-auto flex-shrink-0 object-contain" />
+      <div class="leading-none">
+        <span class="font-display text-white text-2xl tracking-widest group-hover:neon-text transition-colors">GYM<span class="neon-text">ALE</span></span>
+      </div>
+    </a>
+
+    <!-- Desktop Nav Links -->
+    <ul class="hidden md:flex items-center gap-8 font-body font-600 tracking-widest text-sm uppercase text-gray-300">
+      <li><a href="#fasilitas" class="hover:text-neon hover:neon-text transition-all duration-200">Fasilitas</a></li>
+      <li><a href="#coaches"   class="hover:text-neon hover:neon-text transition-all duration-200">Coaches</a></li>
+      <li><a href="#harga"     class="hover:text-neon hover:neon-text transition-all duration-200">Harga</a></li>
+    </ul>
+
+    <!-- CTA Button -->
+    <div class="hidden md:block">
+      <a href="#harga" class="btn-outline-neon">Gabung Sekarang</a>
+    </div>
+
+    <!-- Hamburger (Mobile) -->
+    <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Menu">
+      <span class="block w-6 h-0.5 bg-white transition-all duration-300" id="hb1"></span>
+      <span class="block w-6 h-0.5 bg-neon transition-all duration-300" id="hb2"></span>
+      <span class="block w-4 h-0.5 bg-white transition-all duration-300" id="hb3"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden bg-charcoal border-t border-gray-800 mt-2">
+    <ul class="flex flex-col gap-0 font-body font-600 tracking-widest text-sm uppercase text-gray-300 px-6 py-4">
+      <li class="py-3 border-b border-gray-800"><a href="#fasilitas" class="block hover:neon-text">Fasilitas</a></li>
+      <li class="py-3 border-b border-gray-800"><a href="#coaches"   class="block hover:neon-text">Coaches</a></li>
+      <li class="py-3 border-b border-gray-800"><a href="#harga"     class="block hover:neon-text">Harga</a></li>
+      <li class="py-4"><a href="#harga" class="btn-neon inline-block text-sm">Gabung Sekarang</a></li>
+    </ul>
+  </div>
+</nav>
+<!-- /NAVBAR -->
+
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  HERO SECTION                                                  ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+
+  <!-- Background image – foto gym Gymale -->
+  <div
+    class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+    style="background-image: url('./PHOTO TITLE/unnamed.webp');"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Dark overlay -->
+  <div class="absolute inset-0 hero-overlay" aria-hidden="true"></div>
+
+  <!-- Neon accent line top -->
+  <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-neon to-transparent opacity-60" aria-hidden="true"></div>
+
+  <!-- Hero content -->
+  <div class="relative z-10 text-center px-6 max-w-5xl mx-auto pt-28 pb-20">
+
+    <!-- Eyebrow label -->
+    <p class="section-label mb-6 fade-up">Male-Only Gym · Surabaya Timur</p>
+
+    <!-- Main headline -->
+    <h1 class="font-display text-white leading-none tracking-widest mb-4 fade-up"
+        style="font-size: clamp(3.5rem, 14vw, 9rem); animation-delay: 0.1s;">
+      HOUSE OF<br/>
+      <span class="neon-text" style="filter: drop-shadow(0 0 28px rgba(0,229,255,0.6));">JAWARA</span>
+    </h1>
+
+    <!-- Sub-headline -->
+    <p class="text-gray-300 font-body font-400 text-xl md:text-2xl tracking-wide max-w-xl mx-auto mb-10 fade-up" style="animation-delay: 0.2s;">
+      Gym Khusus Pria Pertama di Surabaya Timur.<br/>
+      <span class="text-white font-600">Fokus pada Hasil, Tanpa Distraksi.</span>
+    </p>
+
+    <!-- CTA Buttons -->
+    <div class="flex flex-wrap justify-center gap-4 fade-up" style="animation-delay: 0.3s;">
+      <a href="#harga" class="btn-neon text-base px-8 py-3.5">
+        Mulai Transformasimu
+      </a>
+      <a href="#fasilitas" class="btn-outline-neon text-base px-8 py-3.5">
+        Lihat Fasilitas
+      </a>
+    </div>
+
+    <!-- Stats bar -->
+    <div class="mt-16 flex flex-wrap justify-center gap-8 md:gap-16 fade-up" style="animation-delay: 0.45s;">
+      <div class="text-center">
+        <p class="font-display neon-text text-5xl tracking-widest">3</p>
+        <p class="text-gray-400 text-sm tracking-widest uppercase mt-1">Lantai Gym</p>
+      </div>
+      <div class="w-px bg-gray-700 hidden md:block"></div>
+      <div class="text-center">
+        <p class="font-display neon-text text-5xl tracking-widest">3</p>
+        <p class="text-gray-400 text-sm tracking-widest uppercase mt-1">Expert Coaches</p>
+      </div>
+      <div class="w-px bg-gray-700 hidden md:block"></div>
+      <div class="text-center">
+        <p class="font-display neon-text text-5xl tracking-widest">100%</p>
+        <p class="text-gray-400 text-sm tracking-widest uppercase mt-1">Male Only</p>
+      </div>
+    </div>
+
+  </div>
+
+
+</section>
+<!-- /HERO -->
+
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  FASILITAS – 3 Lantai Terintegrasi                             ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<section id="fasilitas" class="py-24 px-6 lg:px-16 relative noise">
+  <div class="max-w-7xl mx-auto">
+
+    <!-- Section header -->
+    <div class="text-center mb-16 fade-up">
+      <p class="section-label mb-3">Infrastruktur</p>
+      <h2 class="font-display text-white text-5xl md:text-7xl tracking-widest">
+        3 LANTAI <span class="neon-text">TERINTEGRASI</span>
+      </h2>
+      <hr class="neon-hr max-w-xs mx-auto mt-6" />
+      <p class="text-gray-400 mt-4 text-lg max-w-xl mx-auto">Dirancang penuh untuk memaksimalkan performa pria — dari strength, endurance, hingga skill.</p>
+    </div>
+
+    <!-- Cards grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <!-- ── Lantai 2 ── -->
+      <a href="lantai-2.html" class="block group fade-up" style="animation-delay: 0.1s;">
+        <div class="facility-card rounded-sm p-8 h-full transition-all duration-300 group-hover:border-[#00E5FF] group-hover:shadow-[0_0_24px_rgba(0,229,255,0.2)] group-hover:-translate-y-1">
+          <div class="flex items-start justify-between mb-6">
+            <div class="neon-text font-display text-7xl leading-none opacity-20 select-none">02</div>
+            <div class="neon-border rounded-sm p-2.5 transition-all duration-300 group-hover:shadow-[0_0_14px_rgba(0,229,255,0.5)]">
+              <img src="./ICON/FASILITAS/squad_barbell_icon_transparent.png" alt="Squad Icon" width="44" height="44" style="object-fit:contain; display:block; filter: drop-shadow(0 0 5px #00E5FF) drop-shadow(0 0 12px rgba(0,229,255,0.45));" />
+            </div>
+          </div>
+          <h3 class="font-display text-white text-3xl tracking-widest mb-2">LOWER BODY</h3>
+          <p class="neon-text text-sm tracking-widest uppercase font-600 mb-4">&amp; More</p>
+          <ul class="text-gray-400 space-y-2 text-base font-body">
+            <li class="flex items-center gap-2"><span class="neon-text">▸</span> Power Rack &amp; Hack Squat</li>
+            <li class="flex items-center gap-2"><span class="neon-text">▸</span> Smith Machine &amp; Cardio Zone</li>
+            <li class="flex items-center gap-2"><span class="neon-text">▸</span> Merch Jawara &amp; Suplemen</li>
+            <li class="flex items-center gap-2"><span class="neon-text">▸</span> Resepsionis Fast Respon</li>
+          </ul>
+          <p class="inline-flex items-center gap-2 mt-6 neon-text text-sm font-600 tracking-widest uppercase group-hover:underline transition-all">
+            Lihat Detail
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </p>
+        </div>
+      </a>
+
+      <!-- ── Lantai 3 ── -->
+      <a href="lantai-3.html" class="block group fade-up" style="animation-delay: 0.2s;">
+        <div class="facility-card rounded-sm p-8 h-full transition-all duration-300 group-hover:border-[#00E5FF] group-hover:shadow-[0_0_24px_rgba(0,229,255,0.2)] group-hover:-translate-y-1">
+          <div class="flex items-start justify-between mb-6">
+            <div class="neon-text font-display text-7xl leading-none opacity-20 select-none">03</div>
+            <div class="neon-border rounded-sm p-2.5 transition-all duration-300 group-hover:shadow-[0_0_14px_rgba(0,229,255,0.5)]">
+              <img src="./ICON/FASILITAS/upperbody_muscle_icon_transparent.png" alt="Upper Body Icon" width="32" height="32" style="object-fit:contain; display:block; filter: drop-shadow(0 0 5px #00E5FF) drop-shadow(0 0 12px rgba(0,229,255,0.45));" />
+            </div>
+          </div>
+          <h3 class="font-display text-white text-3xl tracking-widest mb-2">UPPER BODY</h3>
+          <p class="neon-text text-sm tracking-widest uppercase font-600 mb-4">&amp; Area Loker</p>
+          <ul class="text-gray-400 space-y-2 text-base font-body">
+            <li class="flex items-center gap-2"><span class="neon-text">▸</span> Chest, Back, Shoulder, Arms Station</li>
+            <li class="flex items-center gap-2"><span class="neon-text">▸</span> Barbell Racks &amp; Free Weight Zone</li>
+            <li class="flex items-center gap-2"><span class="neon-text">▸</span> Area Loker Eksklusif &amp; Aman</li>
+            <li class="flex items-center gap-2"><span class="neon-text">▸</span> Fasilitas Shower Bersih</li>
+          </ul>
+          <p class="inline-flex items-center gap-2 mt-6 neon-text text-sm font-600 tracking-widest uppercase group-hover:underline transition-all">
+            Lihat Detail
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </p>
+        </div>
+      </a>
+
+
+      <!-- ── Lantai 4 ── -->
+      <a href="lantai-4.html" class="block group fade-up" style="animation-delay: 0.3s;">
+        <div class="facility-card rounded-sm p-8 h-full transition-all duration-300 group-hover:border-[#00E5FF] group-hover:shadow-[0_0_24px_rgba(0,229,255,0.2)] group-hover:-translate-y-1">
+          <div class="flex items-start justify-between mb-6">
+            <div class="neon-text font-display text-7xl leading-none opacity-20 select-none">04</div>
+            <div class="neon-border rounded-sm p-2.5 transition-all duration-300 group-hover:shadow-[0_0_14px_rgba(0,229,255,0.5)]">
+              <img src="./ICON/FASILITAS/basketball_hoop_icon_transparent.png" alt="Basket Icon" width="32" height="32" style="object-fit:contain; display:block; filter: drop-shadow(0 0 5px #00E5FF) drop-shadow(0 0 12px rgba(0,229,255,0.45));" />
+            </div>
+          </div>
+          <h3 class="font-display text-white text-3xl tracking-widest mb-2">LAPANGAN</h3>
+          <p class="neon-text text-sm tracking-widest uppercase font-600 mb-4">Basket &amp; Kelas</p>
+          <ul class="text-gray-400 space-y-2 text-base font-body">
+            <li class="flex items-center gap-2"><span class="neon-text">▸</span> Lapangan Basket Tertutup Full Size</li>
+            <li class="flex items-center gap-2"><span class="neon-text">▸</span> Area Kelas &amp; Group Training</li>
+            <li class="flex items-center gap-2"><span class="neon-text">▸</span> Calisthenics Station</li>
+            <li class="flex items-center gap-2"><span class="neon-text">▸</span> Cardio & Functional Zone</li>
+          </ul>
+          <p class="inline-flex items-center gap-2 mt-6 neon-text text-sm font-600 tracking-widest uppercase group-hover:underline transition-all">
+            Lihat Detail
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </p>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+<!-- /FASILITAS -->
+
+
+<!-- Divider -->
+<div class="px-16"><hr class="neon-hr opacity-20" /></div>
+
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  COACHES – The Jawara Makers                                   ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<section id="coaches" class="py-24 px-6 lg:px-16 relative">
+  <div class="max-w-7xl mx-auto">
+
+    <!-- Section header -->
+    <div class="text-center mb-16 fade-up">
+      <p class="section-label mb-3">Mentoring & Coaches</p>
+      <h2 class="font-display text-5xl md:text-7xl tracking-widest">
+        <span class="text-white">THE</span> <span class="neon-text">JAWARA MAKERS</span>
+      </h2>
+      <hr class="neon-hr max-w-xs mx-auto mt-6" />
+      <p class="text-gray-400 mt-4 text-lg max-w-xl mx-auto">Bukan sekadar pelatih. Mereka adalah arsitek transformasi tubuh dan mental Anda.</p>
+    </div>
+
+    <!-- Coach cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+      <!-- ── Coach Aji ── -->
+      <div class="coach-card rounded-sm overflow-hidden fade-up group" style="animation-delay: 0.1s;">
+        <!-- Photo Coach Aji -->
+        <div class="relative h-80 overflow-hidden bg-[#1a1a1a]">
+          <img
+            src="./COACHES/AJI/Screenshot 2026-05-31 223337.png"
+            alt="Coach Aji"
+            class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+          />
+          <!-- Gradient overlay bottom -->
+          <div class="absolute inset-0 bg-gradient-to-t from-[#2A2A2A] via-transparent to-transparent"></div>
+          <!-- Neon bottom accent -->
+          <div class="absolute bottom-0 left-0 right-0 h-1 bg-neon opacity-80 shadow-neon-sm"></div>
+          <!-- Coach number -->
+          <div class="absolute top-4 right-4 font-display text-neon text-4xl opacity-20">01</div>
+        </div>
+        <!-- Info -->
+        <div class="p-7">
+          <h3 class="font-display text-white text-3xl tracking-widest mb-1">COACH AJI</h3>
+          <p class="neon-text text-sm tracking-widest uppercase font-600 mb-4">Fungsional & Calisthenics</p>
+          <p class="text-gray-400 text-base leading-relaxed">
+            Spesialis gerak fungsional dan bodyweight mastery. Coach Aji membantu Anda membangun kendali penuh atas tubuh tanpa alat — murni kekuatan sejati.
+          </p>
+          <div class="mt-5 pt-5 border-t border-gray-700 flex gap-3 flex-wrap">
+            <span class="neon-border text-neon text-xs tracking-wider uppercase px-2.5 py-1 rounded-sm font-body">Calisthenics</span>
+            <span class="neon-border text-neon text-xs tracking-wider uppercase px-2.5 py-1 rounded-sm font-body">Mobility</span>
+            <span class="neon-border text-neon text-xs tracking-wider uppercase px-2.5 py-1 rounded-sm font-body">Core</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Coach Dymas ── -->
+      <div class="coach-card rounded-sm overflow-hidden fade-up group" style="animation-delay: 0.2s;">
+        <!-- Photo Coach Dymas -->
+        <div class="relative h-80 overflow-hidden bg-[#1a1a1a]">
+          <img
+            src="./COACHES/DYMAS/Screenshot 2026-05-31 223043.png"
+            alt="Coach Dymas"
+            class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#2A2A2A] via-transparent to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 h-1 bg-neon opacity-80 shadow-neon-sm"></div>
+          <div class="absolute top-4 right-4 font-display text-neon text-4xl opacity-20">02</div>
+        </div>
+        <div class="p-7">
+          <h3 class="font-display text-white text-3xl tracking-widest mb-1">COACH DYMAS</h3>
+          <p class="neon-text text-sm tracking-widest uppercase font-600 mb-4">Hybrid Training & Powerlifting</p>
+          <p class="text-gray-400 text-base leading-relaxed">
+            Menggabungkan kekuatan raw powerlifting dengan kondisi atletis. Coach Dymas mencetak pria yang tidak hanya kuat di atas platform, tapi di medan nyata.
+          </p>
+          <div class="mt-5 pt-5 border-t border-gray-700 flex gap-3 flex-wrap">
+            <span class="neon-border text-neon text-xs tracking-wider uppercase px-2.5 py-1 rounded-sm font-body">Powerlifting</span>
+            <span class="neon-border text-neon text-xs tracking-wider uppercase px-2.5 py-1 rounded-sm font-body">Strength</span>
+            <span class="neon-border text-neon text-xs tracking-wider uppercase px-2.5 py-1 rounded-sm font-body">Conditioning</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Coach Sahrul ── -->
+      <div class="coach-card rounded-sm overflow-hidden fade-up group" style="animation-delay: 0.3s;">
+        <!-- Photo Coach Sahrul -->
+        <div class="relative h-80 overflow-hidden bg-[#1a1a1a]">
+          <img
+            src="./COACHES/SAHRUL/Screenshot 2026-05-31 223110.png"
+            alt="Coach Sahrul"
+            class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#2A2A2A] via-transparent to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 h-1 bg-neon opacity-80 shadow-neon-sm"></div>
+          <div class="absolute top-4 right-4 font-display text-neon text-4xl opacity-20">03</div>
+        </div>
+        <div class="p-7">
+          <h3 class="font-display text-white text-3xl tracking-widest mb-1">COACH SAHRUL</h3>
+          <p class="neon-text text-sm tracking-widest uppercase font-600 mb-4">Hypertrophy & Body Transformation</p>
+          <p class="text-gray-400 text-base leading-relaxed">
+            Ahli rekayasa estetika tubuh pria. Coach Sahrul merancang program berbasis sains untuk pertumbuhan otot maksimal dan transformasi fisik yang terukur.
+          </p>
+          <div class="mt-5 pt-5 border-t border-gray-700 flex gap-3 flex-wrap">
+            <span class="neon-border text-neon text-xs tracking-wider uppercase px-2.5 py-1 rounded-sm font-body">Hypertrophy</span>
+            <span class="neon-border text-neon text-xs tracking-wider uppercase px-2.5 py-1 rounded-sm font-body">Cutting</span>
+            <span class="neon-border text-neon text-xs tracking-wider uppercase px-2.5 py-1 rounded-sm font-body">Nutrition</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- /COACHES -->
+
+
+<!-- Divider -->
+<div class="px-16"><hr class="neon-hr opacity-20" /></div>
+
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  TESTIMONI – Suara Member Jawara                               ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<section id="testimoni" class="py-24 px-6 lg:px-16 relative">
+  <!-- Subtle glow background -->
+  <div class="absolute inset-0 pointer-events-none overflow-hidden">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-neon opacity-[0.025] rounded-full blur-[120px]"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto relative">
+
+    <!-- Section header -->
+    <div class="text-center mb-16 fade-up">
+      <p class="section-label mb-3">Bukti Nyata</p>
+      <h2 class="font-display text-white text-5xl md:text-7xl tracking-widest">
+        SUARA <span class="neon-text">JAWARA</span>
+      </h2>
+      <hr class="neon-hr max-w-xs mx-auto mt-6" />
+      <p class="text-gray-400 mt-4 text-lg max-w-xl mx-auto">Mereka sudah membuktikan. Sekarang giliran kamu.</p>
+    </div>
+
+    <!-- Marquee Row 1 — scroll LEFT -->
+    <div class="marquee-wrapper mb-5">
+      <div class="marquee-track left">
+        <!-- Set A -->
+        <div class="testi-card-marquee">
+          <div class="testi-quote">&ldquo;</div>
+          <p class="testi-text">Tempat gym cowok ternyaman di Surabaya. Fasilitasnya lengkap banget ada 4 lantai, alatnya juga terawat. Staff ramah dan ngga canggung karena cowok semua. Recommended!</p>
+          <div class="testi-footer">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#0a4a4a,#00E5FF22)"><span class="font-display text-neon text-xl">B</span></div>
+            <div><p class="testi-name">Budi S.</p><p class="testi-role">Local Guide · 15 ulasan</p><div class="testi-stars">★★★★★</div></div>
+          </div>
+        </div>
+        <div class="testi-card-marquee">
+          <div class="testi-quote">&ldquo;</div>
+          <p class="testi-text">Gymale bener-bener the best. Baru kali ini nemu gym khusus cowok yang peralatannya komplit dari free weight sampai calisthenics. Suasananya bikin fokus latihan.</p>
+          <div class="testi-footer">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#0a2a4a,#00E5FF22)"><span class="font-display text-neon text-xl">A</span></div>
+            <div><p class="testi-name">Andre W.</p><p class="testi-role">2 ulasan</p><div class="testi-stars">★★★★★</div></div>
+          </div>
+        </div>
+        <div class="testi-card-marquee">
+          <div class="testi-quote">&ldquo;</div>
+          <p class="testi-text">Tempatnya bersih, loker aman, dan kamar mandinya wangi. Paling seneng sama lapangan basket di lantai 4, abis ngegym bisa langsung main. Bintang 5!</p>
+          <div class="testi-footer">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#1a0a4a,#00E5FF22)"><span class="font-display text-neon text-xl">K</span></div>
+            <div><p class="testi-name">Kevin A.</p><p class="testi-role">8 ulasan</p><div class="testi-stars">★★★★★</div></div>
+          </div>
+        </div>
+        <div class="testi-card-marquee">
+          <div class="testi-quote">&ldquo;</div>
+          <p class="testi-text">Coach di sini profesional dan ngebantu banget buat pemula kayak saya. Programnya jelas dan harganya bersahabat. Vibesnya asik buat latihan serius.</p>
+          <div class="testi-footer">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#3a1a0a,#00E5FF22)"><span class="font-display text-neon text-xl">F</span></div>
+            <div><p class="testi-name">Faisal R.</p><p class="testi-role">Local Guide · 21 ulasan</p><div class="testi-stars">★★★★★</div></div>
+          </div>
+        </div>
+        <div class="testi-card-marquee">
+          <div class="testi-quote">&ldquo;</div>
+          <p class="testi-text">Parkiran luas, alat gym komplit dan modern. Paling suka area lower body di lantai 2 yang alat leg press dan smith machine-nya mantap. Pasti perpanjang member.</p>
+          <div class="testi-footer">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#2a0a3a,#00E5FF22)"><span class="font-display text-neon text-xl">T</span></div>
+            <div><p class="testi-name">Tommy K.</p><p class="testi-role">4 ulasan</p><div class="testi-stars">★★★★★</div></div>
+          </div>
+        </div>
+        <!-- Set B (duplicate for seamless loop) -->
+        <div class="testi-card-marquee">
+          <div class="testi-quote">&ldquo;</div>
+          <p class="testi-text">Tempat gym cowok ternyaman di Surabaya. Fasilitasnya lengkap banget ada 4 lantai, alatnya juga terawat. Staff ramah dan ngga canggung karena cowok semua. Recommended!</p>
+          <div class="testi-footer">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#0a4a4a,#00E5FF22)"><span class="font-display text-neon text-xl">B</span></div>
+            <div><p class="testi-name">Budi S.</p><p class="testi-role">Local Guide · 15 ulasan</p><div class="testi-stars">★★★★★</div></div>
+          </div>
+        </div>
+        <div class="testi-card-marquee">
+          <div class="testi-quote">&ldquo;</div>
+          <p class="testi-text">Gymale bener-bener the best. Baru kali ini nemu gym khusus cowok yang peralatannya komplit dari free weight sampai calisthenics. Suasananya bikin fokus latihan.</p>
+          <div class="testi-footer">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#0a2a4a,#00E5FF22)"><span class="font-display text-neon text-xl">A</span></div>
+            <div><p class="testi-name">Andre W.</p><p class="testi-role">2 ulasan</p><div class="testi-stars">★★★★★</div></div>
+          </div>
+        </div>
+        <div class="testi-card-marquee">
+          <div class="testi-quote">&ldquo;</div>
+          <p class="testi-text">Tempatnya bersih, loker aman, dan kamar mandinya wangi. Paling seneng sama lapangan basket di lantai 4, abis ngegym bisa langsung main. Bintang 5!</p>
+          <div class="testi-footer">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#1a0a4a,#00E5FF22)"><span class="font-display text-neon text-xl">K</span></div>
+            <div><p class="testi-name">Kevin A.</p><p class="testi-role">8 ulasan</p><div class="testi-stars">★★★★★</div></div>
+          </div>
+        </div>
+        <div class="testi-card-marquee">
+          <div class="testi-quote">&ldquo;</div>
+          <p class="testi-text">Coach di sini profesional dan ngebantu banget buat pemula kayak saya. Programnya jelas dan harganya bersahabat. Vibesnya asik buat latihan serius.</p>
+          <div class="testi-footer">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#3a1a0a,#00E5FF22)"><span class="font-display text-neon text-xl">F</span></div>
+            <div><p class="testi-name">Faisal R.</p><p class="testi-role">Local Guide · 21 ulasan</p><div class="testi-stars">★★★★★</div></div>
+          </div>
+        </div>
+        <div class="testi-card-marquee">
+          <div class="testi-quote">&ldquo;</div>
+          <p class="testi-text">Parkiran luas, alat gym komplit dan modern. Paling suka area lower body di lantai 2 yang alat leg press dan smith machine-nya mantap. Pasti perpanjang member.</p>
+          <div class="testi-footer">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#2a0a3a,#00E5FF22)"><span class="font-display text-neon text-xl">T</span></div>
+            <div><p class="testi-name">Tommy K.</p><p class="testi-role">4 ulasan</p><div class="testi-stars">★★★★★</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Marquee Row 2 — scroll RIGHT -->
+    <div class="marquee-wrapper">
+      <div class="marquee-track right">
+        <!-- Set A -->
+        <div class="testi-card-marquee">
+          <div class="testi-quote">&ldquo;</div>
+          <p class="testi-text">Jarang ada gym di Surabaya yang bener-bener paham kebutuhan member pria. Gak perlu jaim, bisa all out pas latihan. Recommended banget buat yang mau fokus bentuk badan.</p>
+          <div class="testi-footer">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#0a3a1a,#00E5FF22)"><span class="font-display text-neon text-xl">R</span></div>
+            <div><p class="testi-name">Reza M.</p><p class="testi-role">6 ulasan</p><div class="testi-stars">★★★★★</div></div>
+          </div>
+        </div>
+        <div class="testi-card-marquee">
+          <div class="testi-quote">&ldquo;</div>
+          <p class="testi-text">Fasilitasnya oke parah! Dari alat beban sampai area kardio semuanya berfungsi dengan baik. Komunitasnya juga supportif, ngga toxic sama sekali.</p>
+          <div class="testi-footer">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#3a1a0a,#00E5FF22)"><span class="font-display text-neon text-xl">H</span></div>
+            <div><p class="testi-name">Hendra S.</p><p class="testi-role">Local Guide · 11 ulasan</p><div class="testi-stars">★★★★★</div></div>
+          </div>
+        </div>
+        <div class="testi-card-marquee">
+          <div class="testi-quote">&ldquo;</div>
+          <p class="testi-text">Membership di sini worth it banget. Alatnya lengkap, sirkulasi udaranya bagus jadi ngga pengap. Apalagi buat yang suka main calisthenics, stationnya proper abis.</p>
+          <div class="testi-footer">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#2a0a3a,#00E5FF22)"><span class="font-display text-neon text-xl">D</span></div>
+            <div><p class="testi-name">Doni T.</p><p class="testi-role">9 ulasan</p><div class="testi-stars">★★★★★</div></div>
+          </div>
+        </div>
+        <div class="testi-card-marquee">
+          <div class="testi-quote">&ldquo;</div>
+          <p class="testi-text">Gym terbaik di daerah Sukolilo. Aksesnya gampang dan pelayanannya top. Coach Dymas dan Coach Aji ngasih tips latihan yang ngena banget. Auto langganan.</p>
+          <div class="testi-footer">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#0a4a4a,#00E5FF22)"><span class="font-display text-neon text-xl">Y</span></div>
+            <div><p class="testi-name">Yoga P.</p><p class="testi-role">1 ulasan</p><div class="testi-stars">★★★★★</div></div>
+          </div>
+        </div>
+        <div class="testi-card-marquee">
+          <div class="testi-quote">&ldquo;</div>
+          <p class="testi-text">Udah nyobain banyak gym, tapi Gymale the jawara makers emang beda. Selain alatnya lengkap, vibes brotherhood-nya kerasa banget. Bikin makin semangat nge-gym!</p>
+          <div class="testi-footer">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#1a0a4a,#00E5FF22)"><span class="font-display text-neon text-xl">S</span></div>
+            <div><p class="testi-name">Satria D.</p><p class="testi-role">Local Guide · 18 ulasan</p><div class="testi-stars">★★★★★</div></div>
+          </div>
+        </div>
+        <!-- Set B (duplicate for seamless loop) -->
+        <div class="testi-card-marquee">
+          <div class="testi-quote">&ldquo;</div>
+          <p class="testi-text">Jarang ada gym di Surabaya yang bener-bener paham kebutuhan member pria. Gak perlu jaim, bisa all out pas latihan. Recommended banget buat yang mau fokus bentuk badan.</p>
+          <div class="testi-footer">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#0a3a1a,#00E5FF22)"><span class="font-display text-neon text-xl">R</span></div>
+            <div><p class="testi-name">Reza M.</p><p class="testi-role">6 ulasan</p><div class="testi-stars">★★★★★</div></div>
+          </div>
+        </div>
+        <div class="testi-card-marquee">
+          <div class="testi-quote">&ldquo;</div>
+          <p class="testi-text">Fasilitasnya oke parah! Dari alat beban sampai area kardio semuanya berfungsi dengan baik. Komunitasnya juga supportif, ngga toxic sama sekali.</p>
+          <div class="testi-footer">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#3a1a0a,#00E5FF22)"><span class="font-display text-neon text-xl">H</span></div>
+            <div><p class="testi-name">Hendra S.</p><p class="testi-role">Local Guide · 11 ulasan</p><div class="testi-stars">★★★★★</div></div>
+          </div>
+        </div>
+        <div class="testi-card-marquee">
+          <div class="testi-quote">&ldquo;</div>
+          <p class="testi-text">Membership di sini worth it banget. Alatnya lengkap, sirkulasi udaranya bagus jadi ngga pengap. Apalagi buat yang suka main calisthenics, stationnya proper abis.</p>
+          <div class="testi-footer">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#2a0a3a,#00E5FF22)"><span class="font-display text-neon text-xl">D</span></div>
+            <div><p class="testi-name">Doni T.</p><p class="testi-role">9 ulasan</p><div class="testi-stars">★★★★★</div></div>
+          </div>
+        </div>
+        <div class="testi-card-marquee">
+          <div class="testi-quote">&ldquo;</div>
+          <p class="testi-text">Gym terbaik di daerah Sukolilo. Aksesnya gampang dan pelayanannya top. Coach Dymas dan Coach Aji ngasih tips latihan yang ngena banget. Auto langganan.</p>
+          <div class="testi-footer">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#0a4a4a,#00E5FF22)"><span class="font-display text-neon text-xl">Y</span></div>
+            <div><p class="testi-name">Yoga P.</p><p class="testi-role">1 ulasan</p><div class="testi-stars">★★★★★</div></div>
+          </div>
+        </div>
+        <div class="testi-card-marquee">
+          <div class="testi-quote">&ldquo;</div>
+          <p class="testi-text">Udah nyobain banyak gym, tapi Gymale the jawara makers emang beda. Selain alatnya lengkap, vibes brotherhood-nya kerasa banget. Bikin makin semangat nge-gym!</p>
+          <div class="testi-footer">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#1a0a4a,#00E5FF22)"><span class="font-display text-neon text-xl">S</span></div>
+            <div><p class="testi-name">Satria D.</p><p class="testi-role">Local Guide · 18 ulasan</p><div class="testi-stars">★★★★★</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- /TESTIMONI -->
+
+
+<!-- Divider -->
+<div class="px-16"><hr class="neon-hr opacity-20" /></div>
+
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  FIND US – Lokasi Gymale                                        ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<section id="find-us" class="py-24 px-6 lg:px-16 relative">
+  <div class="max-w-7xl mx-auto">
+
+    <!-- Section header -->
+    <div class="text-center mb-16 fade-up">
+      <p class="section-label mb-3">Kunjungi Kami</p>
+      <h2 class="font-display text-white text-5xl md:text-7xl tracking-widest">
+        FIND <span class="neon-text">US</span>
+      </h2>
+      <hr class="neon-hr max-w-xs mx-auto mt-6" />
+    </div>
+
+    <!-- Map + Info grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch fade-up" style="animation-delay:0.1s;">
+
+      <!-- LEFT: Google Maps -->
+      <div class="findus-map w-full min-h-[380px]">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.5!2d112.7785!3d-7.2906!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fb3e3c8e3e3b%3A0x0!2sJl.+Nginden+Semolo+No.42%2C+Surabaya!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
+          width="100%"
+          height="100%"
+          style="min-height:380px; border:0; display:block;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Lokasi Gymale Surabaya"
+        ></iframe>
+      </div>
+
+      <!-- RIGHT: Info -->
+      <div class="flex flex-col justify-center gap-8">
+
+        <!-- Address block -->
+        <div>
+          <p class="section-label mb-3">Alamat</p>
+          <div class="flex items-start gap-4">
+            <div class="mt-1 flex-shrink-0">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-white font-display text-2xl tracking-widest mb-1">GYMALE SURABAYA</p>
+              <p class="text-gray-400 font-body text-base leading-relaxed">
+                Jl. Nginden Semolo No.42,<br>
+                Menur Pumpungan, Kec. Sukolilo,<br>
+                Surabaya, Jawa Timur 60118
+              </p>
+              <a
+                href="https://maps.google.com/?q=Jl.+Nginden+Semolo+No.42+Surabaya"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 mt-4 neon-text text-sm font-600 tracking-widest uppercase hover:underline transition-all"
+              >
+                Buka di Google Maps
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <hr class="neon-hr opacity-20" />
+
+        <!-- Follow Us block -->
+        <div>
+          <p class="section-label mb-5">Follow Us</p>
+          <div class="flex flex-col gap-4">
+
+            <!-- Instagram -->
+            <a
+              href="https://instagram.com/gymale.id"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="findus-social-link group"
+            >
+              <div class="w-10 h-10 neon-border rounded-sm flex items-center justify-center flex-shrink-0 transition-all group-hover:bg-[rgba(0,229,255,0.07)]">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-white text-sm font-600 tracking-wide">Instagram</p>
+                <p class="text-gray-500 text-xs tracking-widest">@gymale.id</p>
+              </div>
+            </a>
+
+            <!-- TikTok -->
+            <a
+              href="https://tiktok.com/@gymale.id"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="findus-social-link group"
+            >
+              <div class="w-10 h-10 neon-border rounded-sm flex items-center justify-center flex-shrink-0 transition-all group-hover:bg-[rgba(0,229,255,0.07)]">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-white text-sm font-600 tracking-wide">TikTok</p>
+                <p class="text-gray-500 text-xs tracking-widest">@gymale.id</p>
+              </div>
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /FIND US -->
+
+
+<!-- Divider -->
+<div class="px-16"><hr class="neon-hr opacity-20" /></div>
+
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  PRICING – Harga Terjangkau                                    ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<section id="harga" class="py-24 px-6 lg:px-16 relative noise">
+  <div class="max-w-6xl mx-auto">
+
+    <!-- Section header -->
+    <div class="text-center mb-16 fade-up">
+      <p class="section-label mb-3">Investasi</p>
+      <h2 class="font-display text-white text-5xl md:text-7xl tracking-widest">
+        HARGA <span class="neon-text">TERJANGKAU</span>
+      </h2>
+      <hr class="neon-hr max-w-xs mx-auto mt-6" />
+      <p class="text-gray-400 mt-4 text-lg max-w-xl mx-auto">Transformasi serius tidak harus mahal. Pilih paket yang sesuai.</p>
+    </div>
+
+    <!-- Pricing grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+
+      <!-- ── Student Card ── -->
+      <div class="pricing-card featured rounded-sm p-10 fade-up relative overflow-hidden" style="animation-delay: 0.1s;">
+        <!-- Badge -->
+        <div class="absolute top-0 right-0 bg-neon text-black font-body font-700 text-xs tracking-widest uppercase px-4 py-1.5">
+          Best Value for Students
+        </div>
+
+        <!-- Top -->
+        <div class="mb-8">
+          <!-- Icon -->
+          <div class="mb-4">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-white text-4xl tracking-widest mb-1">STUDENT</h3>
+          <p class="text-gray-400 text-base">Khusus pelajar & mahasiswa aktif</p>
+        </div>
+
+        <!-- Price -->
+        <div class="mb-8">
+          <div class="flex items-baseline gap-2">
+            <span class="text-gray-400 font-body text-lg">Rp</span>
+            <span class="font-display neon-text tracking-widest" style="font-size: 4rem; line-height: 1; text-shadow: 0 0 20px rgba(0,229,255,0.5);">230.000</span>
+          </div>
+          <span class="text-gray-400 text-base tracking-widest">/Bulan</span>
+        </div>
+
+        <!-- Features -->
+        <ul class="space-y-3 mb-10 text-gray-300 font-body text-base">
+          <li class="flex items-center gap-3">
+            <svg class="text-neon flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Akses Gym Penuh (Lt. 2, 3, 4)
+          </li>
+          <li class="flex items-center gap-3">
+            <svg class="text-neon flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Sistem Barcode Entry
+          </li>
+          <li class="flex items-center gap-3">
+            <svg class="text-neon flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Akses Lapangan Basket
+          </li>
+          <li class="flex items-center gap-3">
+            <svg class="text-neon flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Loker Eksklusif
+          </li>
+          <li class="flex items-center gap-3 text-gray-500">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            <span class="line-through">Personal Coach (Addon)</span>
+          </li>
+        </ul>
+
+        <a href="https://wa.me/6285955204028?text=Halo%20Admin%20Gymale!%20Saya%20mahasiswa%2Fpelajar%2C%20mau%20daftar%20membership%20untuk%20Student.%20Apa%20saja%20syarat%20yang%20perlu%20dibawa%3F" target="_blank" rel="noopener noreferrer" class="btn-neon w-full block text-center text-lg py-4">
+          Daftar Sekarang →
+        </a>
+        <p class="text-gray-500 text-xs text-center mt-3 tracking-wide">*Wajib menunjukkan KTM/kartu pelajar aktif</p>
+      </div>
+
+      <!-- ── Regular Card ── -->
+      <div class="pricing-card rounded-sm p-10 fade-up relative overflow-hidden" style="animation-delay: 0.2s;">
+
+        <!-- Header -->
+        <div class="mb-8">
+          <div class="mb-4">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 8v4l3 3"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-white text-4xl tracking-widest mb-1">REGULAR</h3>
+          <p class="text-gray-400 text-base">Untuk pria serius yang berkomitmen</p>
+        </div>
+
+        <!-- Pricing table -->
+        <div class="space-y-4 mb-10">
+
+          <!-- Monthly -->
+          <div class="flex items-center justify-between bg-charcoal rounded-sm px-5 py-4 border border-gray-800">
+            <div>
+              <p class="text-gray-400 text-sm tracking-widest uppercase">1 Bulan</p>
+            </div>
+            <div class="text-right">
+              <p class="font-display text-white text-2xl tracking-widest">Rp 250.000</p>
+            </div>
+          </div>
+
+          <!-- 3 Months -->
+          <div class="flex items-center justify-between bg-charcoal rounded-sm px-5 py-4 border border-gray-800">
+            <div>
+              <p class="text-gray-400 text-sm tracking-widest uppercase">3 Bulan</p>
+              <p class="text-neon text-xs tracking-wide">~Rp 225.000/bln</p>
+            </div>
+            <div class="text-right">
+              <p class="font-display text-white text-2xl tracking-widest">Rp 675.000</p>
+            </div>
+          </div>
+
+          <!-- 6 Months -->
+          <div class="flex items-center justify-between bg-charcoal rounded-sm px-5 py-4 border border-gray-800">
+            <div>
+              <p class="text-gray-400 text-sm tracking-widest uppercase">6 Bulan</p>
+              <p class="text-neon text-xs tracking-wide">~Rp 195.000/bln</p>
+            </div>
+            <div class="text-right">
+              <p class="font-display text-white text-2xl tracking-widest">Rp 1.170.000</p>
+            </div>
+          </div>
+
+          <!-- 12 Months – Best Value -->
+          <div class="relative flex items-center justify-between bg-charcoal-card rounded-sm px-5 py-4 neon-border">
+            <div class="absolute -top-3 left-4">
+              <span class="bg-neon text-black text-xs font-body font-700 tracking-widest uppercase px-3 py-0.5 rounded-sm">Best Value</span>
+            </div>
+            <div class="mt-2">
+              <p class="text-white font-600 text-sm tracking-widest uppercase">12 Bulan</p>
+              <p class="neon-text text-xs tracking-wide">~Rp 183.333/bln · Hemat 27%</p>
+            </div>
+            <div class="text-right mt-2">
+              <p class="font-display neon-text text-2xl tracking-widest" style="text-shadow: 0 0 12px rgba(0,229,255,0.4);">Rp 2.200.000</p>
+            </div>
+          </div>
+
+        </div>
+
+        <a href="https://wa.me/6285955204028?text=Halo%20Admin%20Gymale!%20Saya%20lihat%20website%20House%20of%20Jawara%20dan%20tertarik%20untuk%20bergabung.%20Boleh%20info%20untuk%20pendaftaran%20member%20baru%3F" target="_blank" rel="noopener noreferrer" class="btn-outline-neon w-full block text-center text-lg py-4">
+          Pilih Paket Regular →
+        </a>
+        <p class="text-gray-500 text-xs text-center mt-3 tracking-wide">*Harga sudah termasuk akses semua fasilitas</p>
+      </div>
+
+    </div>
+
+    <!-- CTA note -->
+    <p class="text-center text-gray-500 text-sm mt-10 fade-up tracking-wide">
+      Ada pertanyaan soal membership? 
+      <a href="https://wa.me/6285955204028?text=Halo%20Admin!%20Saya%20mau%20tanya-tanya%20dulu%20tentang%20program%20di%20Gymale.%20Boleh%20minta%20detailnya%3F" target="_blank" rel="noopener noreferrer" class="neon-text hover:underline">Hubungi kami via WhatsApp →</a>
+    </p>
+
+  </div>
+</section>
+<!-- /PRICING -->
+
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  FOOTER                                                        ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<footer class="bg-black border-t border-gray-900 px-6 lg:px-16 py-14">
+  <div class="max-w-7xl mx-auto">
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+
+      <!-- Brand column -->
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <img src="./LOGO/Logo-gymmale.webp" alt="Gymale Logo" class="h-9 w-auto object-contain flex-shrink-0" />
+          <span class="font-display text-white text-2xl tracking-widest">GYM<span class="neon-text">ALE</span></span>
+        </div>
+        <p class="text-gray-500 text-sm leading-relaxed max-w-xs">
+          Gym Khusus Pria Pertama di Surabaya Timur. Tempat pria membangun versi terkuat dirinya.
+        </p>
+        <p class="neon-text text-sm font-600 tracking-widest mt-4 uppercase">House of Jawara</p>
+      </div>
+
+      <!-- Address column -->
+      <div>
+        <h4 class="font-display text-white text-xl tracking-widest mb-4">LOKASI</h4>
+        <div class="flex items-start gap-3 text-gray-400 text-sm leading-relaxed">
+          <svg class="mt-0.5 flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+          <div>
+            <p class="text-white font-600">Gymale Surabaya</p>
+            <p>Jl. Nginden Semolo No.42</p>
+            <p>Surabaya Timur, Jawa Timur</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jam Operasional column -->
+      <div>
+        <h4 class="font-display text-white text-xl tracking-widest mb-4">JAM OPERASIONAL</h4>
+        <div class="space-y-3">
+
+          <!-- Senin - Sabtu -->
+          <div class="flex items-start gap-3">
+            <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <div>
+              <p class="text-white font-600 text-sm tracking-wide">Senin – Sabtu</p>
+              <p class="neon-text font-display text-xl tracking-widest">07.00 – 22.00</p>
+              <p class="text-gray-600 text-xs tracking-widest uppercase">WIB</p>
+            </div>
+          </div>
+
+          <div class="h-px bg-gradient-to-r from-[rgba(0,229,255,0.2)] to-transparent"></div>
+
+          <!-- Minggu -->
+          <div class="flex items-start gap-3">
+            <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <div>
+              <p class="text-white font-600 text-sm tracking-wide">Minggu</p>
+              <p class="font-display text-xl tracking-widest" style="color:#00E5FF; opacity:0.7;">07.00 – 14.00</p>
+              <p class="text-gray-600 text-xs tracking-widest uppercase">WIB</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Socials & links column -->
+      <div>
+        <h4 class="font-display text-white text-xl tracking-widest mb-4">IKUTI KAMI</h4>
+        <div class="flex flex-col items-start gap-3">
+          <!-- Instagram -->
+          <a
+            href="https://instagram.com/gymale.id"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-3 text-gray-300 hover:neon-text transition-all group"
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-neon transition-all">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+            <span class="font-body tracking-widest text-sm">@gymale.id</span>
+          </a>
+          <!-- TikTok -->
+          <a
+            href="https://tiktok.com/@gymale.id"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-3 text-gray-300 hover:neon-text transition-all group"
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-neon transition-all">
+              <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+            </svg>
+            <span class="font-body tracking-widest text-sm">@gymale.id</span>
+          </a>
+        </div>
+
+        <div class="mt-8">
+          <p class="text-gray-600 text-xs tracking-widest uppercase mb-2">Quick Links</p>
+          <div class="flex flex-col gap-2">
+            <a href="#fasilitas" class="text-gray-400 text-sm hover:neon-text transition-all font-body tracking-wider">→ Fasilitas</a>
+            <a href="#coaches"   class="text-gray-400 text-sm hover:neon-text transition-all font-body tracking-wider">→ Coaches</a>
+            <a href="#harga"     class="text-gray-400 text-sm hover:neon-text transition-all font-body tracking-wider">→ Harga</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <hr class="neon-hr opacity-20 mb-6" />
+    <div class="flex flex-col md:flex-row justify-between items-center gap-3">
+      <p class="text-gray-600 text-xs tracking-widest font-body">
+        © 2025 <span class="text-gray-400">Gymale Surabaya</span>. All rights reserved.
+      </p>
+      <p class="text-gray-700 text-xs tracking-wider font-body">
+        Male Only · <span class="neon-text opacity-70">House of Jawara</span>
+      </p>
+    </div>
+
+  </div>
+</footer>
+<!-- /FOOTER -->
+
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  JAVASCRIPT                                                     ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<script>
+  /* ── Navbar scroll effect ── */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  /* ── Mobile hamburger menu ── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const hb1 = document.getElementById('hb1');
+  const hb2 = document.getElementById('hb2');
+  const hb3 = document.getElementById('hb3');
+  let menuOpen = false;
+
+  hamburger.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    mobileMenu.classList.toggle('open', menuOpen);
+    // Animate hamburger bars
+    hb1.style.transform = menuOpen ? 'rotate(45deg) translate(6px, 6px)' : '';
+    hb2.style.opacity   = menuOpen ? '0' : '1';
+    hb3.style.transform = menuOpen ? 'rotate(-45deg) translate(6px, -6px)' : '';
+    hb3.style.width     = menuOpen ? '24px' : '16px';
+  });
+
+  // Close on link click
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menuOpen = false;
+      mobileMenu.classList.remove('open');
+      hb1.style.transform = hb2.style.opacity = hb3.style.transform = '';
+      hb2.style.opacity = '1';
+      hb3.style.width = '16px';
+    });
+  });
+
+  /* ── Intersection Observer – fade-up animations ── */
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  /* ── Immediate trigger for hero (already visible on load) ── */
+  setTimeout(() => {
+    document.querySelectorAll('#hero .fade-up').forEach(el => el.classList.add('visible'));
+  }, 100);
+</script>
+
+</body>
+</html>
