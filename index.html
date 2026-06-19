@@ -116,8 +116,9 @@
     .hero-overlay {
       background: linear-gradient(
         to bottom,
-        rgba(0,0,0,0.72) 0%,
-        rgba(30,30,30,0.55) 50%,
+        rgba(0,0,0,0.7) 0%,
+        rgba(30,30,30,0.3) 40%,
+        rgba(30,30,30,0.85) 85%,
         rgba(30,30,30,1) 100%
       );
     }
@@ -138,6 +139,18 @@
       box-shadow: 0 0 20px rgba(0,229,255,0.2);
       transform: translateY(-4px);
     }
+
+    /* ---------- Program card float animation ---------- */
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .program-card {
+      animation: floatCard 4s ease-in-out infinite;
+    }
+    .program-card:nth-child(2) { animation-delay: 0.5s; }
+    .program-card:nth-child(3) { animation-delay: 1s; }
+    .program-card:nth-child(4) { animation-delay: 1.5s; }
 
     /* ---------- Coach card hover ---------- */
     .coach-card {
@@ -168,14 +181,40 @@
     }
 
     /* ---------- Noise texture overlay ---------- */
-    .noise::after {
+    /* Removed per user request */
+
+    /* ---------- Vignette overlay ---------- */
+    .vignette::before {
       content: '';
       position: absolute;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.55) 100%);
       pointer-events: none;
-      opacity: 0.03;
+      z-index: 0;
     }
+
+    /* ---------- Dark Cinematic Fog ---------- */
+    @keyframes float-fog-1 {
+      0% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(5vw, 5vh) scale(1.1); }
+      66% { transform: translate(-2vw, 3vh) scale(0.95); }
+      100% { transform: translate(0, 0) scale(1); }
+    }
+    @keyframes float-fog-2 {
+      0% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(-5vw, -4vh) scale(1.05); }
+      66% { transform: translate(3vw, -2vh) scale(1.1); }
+      100% { transform: translate(0, 0) scale(1); }
+    }
+    @keyframes float-fog-3 {
+      0% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(-3vw, 4vh) scale(0.9); }
+      66% { transform: translate(4vw, -3vh) scale(1.05); }
+      100% { transform: translate(0, 0) scale(1); }
+    }
+    .animate-fog-1 { animation: float-fog-1 30s ease-in-out infinite; }
+    .animate-fog-2 { animation: float-fog-2 35s ease-in-out infinite; }
+    .animate-fog-3 { animation: float-fog-3 40s ease-in-out infinite; }
 
     /* ---------- Scrollbar ---------- */
     ::-webkit-scrollbar { width: 6px; }
@@ -450,25 +489,35 @@
 
 
 <!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  SEAMLESS BACKGROUND WRAPPER (Hero to Harga)                   ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<div class="relative">
+  <!-- HERO BACKGROUND (Detached so Ambient wrapper can overlay it) -->
+  <div class="absolute top-0 left-0 w-full h-screen z-[-1]">
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('./FASILITAS/HEADER.webp');" aria-hidden="true"></div>
+    <div class="absolute inset-0 hero-overlay" aria-hidden="true"></div>
+    <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-neon to-transparent opacity-60" aria-hidden="true"></div>
+  </div>
+
+  <div class="absolute inset-0 pointer-events-none z-0">
+    <div class="sticky top-0 left-0 w-full h-screen overflow-hidden">
+      <!-- Vignette -->
+      <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.7) 100%); z-index:0;"></div>
+      
+      <!-- Dark Cinematic Fog -->
+      <div class="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] bg-[#2a2a2a] opacity-20 rounded-full blur-[150px] animate-fog-1"></div>
+      <div class="absolute bottom-[-20%] right-[-10%] w-[70vw] h-[70vw] bg-[#1f1f1f] opacity-30 rounded-full blur-[180px] animate-fog-2"></div>
+      <div class="absolute top-[30%] left-[50%] w-[50vw] h-[50vw] bg-[#111111] opacity-40 rounded-full blur-[140px] animate-fog-3"></div>
+    </div>
+  </div>
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
      ║  HERO SECTION                                                  ║
      ╚══════════════════════════════════════════════════════════════╝ -->
-<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
-
-  <!-- Background image – foto gym Gymale -->
-  <div
-    class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-    style="background-image: url('./FASILITAS/HEADER.webp');"
-    aria-hidden="true"
-  ></div>
-
-  <!-- Dark overlay -->
-  <div class="absolute inset-0 hero-overlay" aria-hidden="true"></div>
-
-  <!-- Neon accent line top -->
-  <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-neon to-transparent opacity-60" aria-hidden="true"></div>
+<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden z-10">
 
   <!-- Hero content -->
-  <div class="relative z-10 text-center px-6 max-w-5xl mx-auto pt-28 pb-20">
+  <div class="relative z-10 text-center px-6 max-w-5xl mx-auto pt-28 pb-16">
 
     <!-- Eyebrow label -->
     <p class="section-label mb-6 fade-up">Male-Only Gym · Surabaya Timur</p>
@@ -524,7 +573,7 @@
 <!-- ╔══════════════════════════════════════════════════════════════╗
      ║  FASILITAS – 3 Lantai Terintegrasi                             ║
      ╚══════════════════════════════════════════════════════════════╝ -->
-<section id="fasilitas" class="py-24 px-6 lg:px-16 relative noise">
+<section id="fasilitas" class="pt-20 pb-24 px-6 lg:px-16 relative z-10">
   <div class="max-w-7xl mx-auto">
 
     <!-- Section header -->
@@ -534,7 +583,7 @@
         3 LANTAI <span class="neon-text">TERINTEGRASI</span>
       </h2>
       <hr class="neon-hr max-w-xs mx-auto mt-6" />
-      <p class="text-gray-400 mt-4 text-lg max-w-xl mx-auto">Dirancang untuk memaksimalkan potensi seorang Jawara – Strength, endurance, and skill, all in one space.</p>
+      <p class="text-gray-400 mt-4 text-lg max-w-xl mx-auto">Dirancang untuk memaksimalkan potensi seorang Jawara!</p>
     </div>
 
     <!-- Cards grid -->
@@ -624,8 +673,8 @@
 <!-- ╔══════════════════════════════════════════════════════════════╗
      ║  COACHES – The Jawara Makers                                   ║
      ╚══════════════════════════════════════════════════════════════╝ -->
-<section id="coaches" class="py-24 px-6 lg:px-16 relative">
-  <div class="max-w-7xl mx-auto">
+<section id="coaches" class="py-24 px-6 lg:px-16 relative z-10">
+  <div class="max-w-7xl mx-auto relative">
 
     <!-- Section header -->
     <div class="text-center mb-16 fade-up">
@@ -633,7 +682,6 @@
       <h2 class="font-display text-5xl md:text-7xl tracking-widest">
         <span class="neon-text">JAWARA TRAINERS CLUB</span>
       </h2>
-      <hr class="neon-hr max-w-xs mx-auto mt-6" />
       <p class="text-gray-400 mt-4 text-lg max-w-xl mx-auto">Covers all your need to become a Jawara.</p>
     </div>
 
@@ -647,7 +695,7 @@
           <img
             src="./COACHES/RAKHA/IMG_5016.JPEG"
             alt="Coach Rakha"
-            class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+            class="w-full h-full object-cover object-[center_35%] transition-transform duration-500 group-hover:scale-105"
           />
           <!-- Gradient overlay bottom -->
           <div class="absolute inset-0 bg-gradient-to-t from-[#2A2A2A] via-transparent to-transparent"></div>
@@ -702,23 +750,149 @@
     </div>
   </div>
 </section>
-<!-- /COACHES -->
 
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  PROGRAM UNGGULAN                                              ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<section id="program" class="py-24 px-6 lg:px-16 relative z-10">
+  <div class="max-w-7xl mx-auto relative">
 
-<!-- Divider -->
-<div class="px-16"><hr class="neon-hr opacity-20" /></div>
+    <!-- Section header -->
+    <div class="text-center mb-16 fade-up">
+      <p class="section-label mb-3" style="color: #fff;">Program Unggulan</p>
+      <h2 class="font-display neon-text text-5xl md:text-7xl tracking-widest">
+        FORGE YOUR PATH
+      </h2>
+      <p class="text-gray-400 mt-4 text-lg max-w-xl mx-auto">Pilih program yang sesuai dengan tujuanmu. Setiap program dirancang khusus oleh Jawara Trainers Club.</p>
+    </div>
+
+    <!-- Program cards - 4 columns -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <!-- ── Aesthetic Body Project ── -->
+      <div class="facility-card program-card rounded-sm overflow-hidden fade-up flex flex-col" style="animation-delay: 0.1s;">
+        <div class="relative overflow-hidden">
+          <img src="./PROGRAM/Aesthetic.jpeg" alt="Aesthetic Body Project" class="w-full h-auto object-contain transition-transform duration-500 hover:scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-transparent to-transparent"></div>
+        </div>
+        <div class="p-6 flex flex-col flex-grow">
+          <h3 class="font-display text-white text-xl tracking-widest mb-2">AESTHETIC BODY PROJECT</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4 flex-grow">
+            Dirancang untuk Jawara yang ingin membentuk tubuh lebih atletis dan proporsional. Fokus meningkatkan massa otot dan kekuatan melalui latihan terstruktur.
+          </p>
+          <div class="mb-5">
+            <p class="text-gray-500 text-xs tracking-widest uppercase mb-2">Curriculum:</p>
+            <div class="flex gap-2 flex-wrap">
+              <span class="neon-border text-neon text-[10px] tracking-wider uppercase px-2 py-0.5 rounded-sm font-body">Hypertrophy</span>
+              <span class="neon-border text-neon text-[10px] tracking-wider uppercase px-2 py-0.5 rounded-sm font-body">Compound Lifts</span>
+              <span class="neon-border text-neon text-[10px] tracking-wider uppercase px-2 py-0.5 rounded-sm font-body">Progressive Overload</span>
+              <span class="neon-border text-neon text-[10px] tracking-wider uppercase px-2 py-0.5 rounded-sm font-body">Volume &amp; Intensity</span>
+              <span class="neon-border text-neon text-[10px] tracking-wider uppercase px-2 py-0.5 rounded-sm font-body">Body Composition</span>
+            </div>
+          </div>
+          <a href="https://wa.me/6281234567890?text=Halo%20Admin%2C%20saya%20mau%20coba%20free%20trial%20Aesthetic%20Body%20Project%20gimana%20caranya%20ya%3F" target="_blank" rel="noopener noreferrer" class="btn-neon text-sm px-5 py-2.5 text-center w-full inline-flex items-center justify-center gap-2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Coba Free Trial
+          </a>
+        </div>
+      </div>
+
+      <!-- ── Build for Endurance ── -->
+      <div class="facility-card program-card rounded-sm overflow-hidden fade-up flex flex-col" style="animation-delay: 0.2s;">
+        <div class="relative overflow-hidden">
+          <img src="./PROGRAM/Endurance.jpeg" alt="Build for Endurance" class="w-full h-auto object-contain transition-transform duration-500 hover:scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-transparent to-transparent"></div>
+        </div>
+        <div class="p-6 flex flex-col flex-grow">
+          <h3 class="font-display text-white text-xl tracking-widest mb-2">BUILD FOR ENDURANCE</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4 flex-grow">
+            Dirancang untuk Jawara yang ingin tubuh lebih kuat dipakai di berbagai olahraga. Memperkuat seluruh tubuh dan meningkatkan daya tahan.
+          </p>
+          <div class="mb-5">
+            <p class="text-gray-500 text-xs tracking-widest uppercase mb-2">Curriculum:</p>
+            <div class="flex gap-2 flex-wrap">
+              <span class="neon-border text-neon text-[10px] tracking-wider uppercase px-2 py-0.5 rounded-sm font-body">Full-body Strength Endurance</span>
+              <span class="neon-border text-neon text-[10px] tracking-wider uppercase px-2 py-0.5 rounded-sm font-body">Core Endurance &amp; Trunk Stability</span>
+              <span class="neon-border text-neon text-[10px] tracking-wider uppercase px-2 py-0.5 rounded-sm font-body">Movement Efficiency &amp; Coordination</span>
+            </div>
+          </div>
+          <a href="https://wa.me/6281234567890?text=Halo%20Admin%2C%20saya%20mau%20coba%20free%20trial%20Build%20for%20Endurance%20gimana%20caranya%20ya%3F" target="_blank" rel="noopener noreferrer" class="btn-neon text-sm px-5 py-2.5 text-center w-full inline-flex items-center justify-center gap-2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Coba Free Trial
+          </a>
+        </div>
+      </div>
+
+      <!-- ── Strength for Runners ── -->
+      <div class="facility-card program-card rounded-sm overflow-hidden fade-up flex flex-col" style="animation-delay: 0.3s;">
+        <div class="relative overflow-hidden">
+          <img src="./PROGRAM/Runner.jpeg" alt="Strength for Runners" class="w-full h-auto object-contain transition-transform duration-500 hover:scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-transparent to-transparent"></div>
+        </div>
+        <div class="p-6 flex flex-col flex-grow">
+          <h3 class="font-display text-white text-xl tracking-widest mb-2">STRENGTH FOR RUNNERS</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4 flex-grow">
+            Dirancang untuk pelari yang pace-nya mentok, cepat capek, atau sering cedera. Memperkuat kaki dan core agar lari lebih efisien, stabil, dan aman.
+          </p>
+          <div class="mb-5">
+            <p class="text-gray-500 text-xs tracking-widest uppercase mb-2">Curriculum:</p>
+            <div class="flex gap-2 flex-wrap">
+              <span class="neon-border text-neon text-[10px] tracking-wider uppercase px-2 py-0.5 rounded-sm font-body">Lower Body Strength</span>
+              <span class="neon-border text-neon text-[10px] tracking-wider uppercase px-2 py-0.5 rounded-sm font-body">Plyometric Training</span>
+              <span class="neon-border text-neon text-[10px] tracking-wider uppercase px-2 py-0.5 rounded-sm font-body">Hip &amp; Ankle Mobility</span>
+              <span class="neon-border text-neon text-[10px] tracking-wider uppercase px-2 py-0.5 rounded-sm font-body">Core &amp; Anti-Rotation</span>
+            </div>
+          </div>
+          <a href="https://wa.me/6281234567890?text=Halo%20Admin%2C%20saya%20mau%20coba%20free%20trial%20Strength%20for%20Runners%20gimana%20caranya%20ya%3F" target="_blank" rel="noopener noreferrer" class="btn-neon text-sm px-5 py-2.5 text-center w-full inline-flex items-center justify-center gap-2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Coba Free Trial
+          </a>
+        </div>
+      </div>
+
+      <!-- ── Active 40+ ── -->
+      <div class="facility-card program-card rounded-sm overflow-hidden fade-up flex flex-col" style="animation-delay: 0.4s;">
+        <div class="relative overflow-hidden">
+          <img src="./PROGRAM/40+.jpeg" alt="Active 40+" class="w-full h-auto object-contain transition-transform duration-500 hover:scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-transparent to-transparent"></div>
+        </div>
+        <div class="p-6 flex flex-col flex-grow">
+          <h3 class="font-display text-white text-xl tracking-widest mb-2">ACTIVE 40+</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4 flex-grow">
+            Dirancang untuk Jawara usia 40+ yang mulai sering pegal, cepat lelah, dan bangun tidur nggak terasa segar. Fokus membangun kembali kekuatan otot dan sendi.
+          </p>
+          <div class="mb-5">
+            <p class="text-gray-500 text-xs tracking-widest uppercase mb-2">Curriculum:</p>
+            <div class="flex gap-2 flex-wrap">
+              <span class="neon-border text-neon text-[10px] tracking-wider uppercase px-2 py-0.5 rounded-sm font-body">Bodyweight Strength</span>
+              <span class="neon-border text-neon text-[10px] tracking-wider uppercase px-2 py-0.5 rounded-sm font-body">Core Stability &amp; Balance</span>
+              <span class="neon-border text-neon text-[10px] tracking-wider uppercase px-2 py-0.5 rounded-sm font-body">Functional Movement</span>
+            </div>
+          </div>
+          <a href="https://wa.me/6281234567890?text=Halo%20Admin%2C%20saya%20mau%20coba%20free%20trial%20Active%2040%2B%20gimana%20caranya%20ya%3F" target="_blank" rel="noopener noreferrer" class="btn-neon text-sm px-5 py-2.5 text-center w-full inline-flex items-center justify-center gap-2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Coba Free Trial
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- /PROGRAM UNGGULAN -->
+
 
 
 <!-- ╔══════════════════════════════════════════════════════════════╗
      ║  TESTIMONI – Suara Member Jawara                               ║
      ╚══════════════════════════════════════════════════════════════╝ -->
-<section id="testimoni" class="py-24 px-6 lg:px-16 relative">
+<section id="testimoni" class="py-24 relative z-[1] overflow-hidden">
   <!-- Subtle glow background -->
   <div class="absolute inset-0 pointer-events-none overflow-hidden">
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-neon opacity-[0.025] rounded-full blur-[120px]"></div>
   </div>
 
-  <div class="max-w-7xl mx-auto relative">
+  <div class="max-w-7xl mx-auto px-6 lg:px-16 relative">
 
     <!-- Section header -->
     <div class="text-center mb-16 fade-up">
@@ -729,7 +903,9 @@
       <hr class="neon-hr max-w-xs mx-auto mt-6" />
       <p class="text-gray-400 mt-4 text-lg max-w-xl mx-auto">Mereka sudah membuktikan. Sekarang giliran kamu.</p>
     </div>
+  </div>
 
+  <div class="w-full relative mt-16">
     <!-- Marquee Row 1 — scroll LEFT -->
     <div class="marquee-wrapper mb-5">
       <div class="marquee-track left">
@@ -918,7 +1094,7 @@
 <!-- ╔══════════════════════════════════════════════════════════════╗
      ║  FIND US – Lokasi Gymale                                        ║
      ╚══════════════════════════════════════════════════════════════╝ -->
-<section id="find-us" class="py-24 px-6 lg:px-16 relative">
+<section id="find-us" class="py-24 px-6 lg:px-16 relative z-10">
   <div class="max-w-7xl mx-auto">
 
     <!-- Section header -->
@@ -927,7 +1103,6 @@
       <h2 class="font-display text-white text-5xl md:text-7xl tracking-widest">
         FIND <span class="neon-text">US</span>
       </h2>
-      <hr class="neon-hr max-w-xs mx-auto mt-6" />
     </div>
 
     <!-- Map + Info grid -->
@@ -967,10 +1142,10 @@
                 Surabaya, Jawa Timur 60118
               </p>
               <a
-                href="https://maps.google.com/?q=Jl.+Nginden+Semolo+No.42+Surabaya"
+                href="https://maps.app.goo.gl/CYPL7bJaFKr3GsR79"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 mt-4 neon-text text-sm font-600 tracking-widest uppercase hover:underline transition-all"
+                class="inline-flex items-center gap-2 mt-4 neon-text text-sm font-600 tracking-widest uppercase transition-all"
               >
                 Buka di Google Maps
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
@@ -1041,7 +1216,7 @@
 <!-- ╔══════════════════════════════════════════════════════════════╗
      ║  PRICING – Harga Terjangkau                                    ║
      ╚══════════════════════════════════════════════════════════════╝ -->
-<section id="harga" class="py-24 px-6 lg:px-16 relative noise">
+<section id="harga" class="py-24 px-6 lg:px-16 relative z-10">
   <div class="max-w-7xl mx-auto">
 
     <!-- Section header -->
@@ -1050,7 +1225,6 @@
       <h2 class="font-display text-white text-5xl md:text-7xl tracking-widest">
         HARGA <span class="neon-text">TERJANGKAU</span>
       </h2>
-      <hr class="neon-hr max-w-xs mx-auto mt-6" />
       <p class="text-gray-400 mt-4 text-lg max-w-xl mx-auto">Transformasi serius tidak harus mahal. Pilih paket yang sesuai.</p>
     </div>
 
@@ -1138,6 +1312,9 @@
   </div>
 </section>
 <!-- /PRICING -->
+
+</div>
+<!-- /SEAMLESS BACKGROUND WRAPPER -->
 
 
 <!-- ╔══════════════════════════════════════════════════════════════╗
@@ -1257,7 +1434,7 @@
     <hr class="neon-hr opacity-20 mb-6" />
     <div class="flex flex-col md:flex-row justify-between items-center gap-3">
       <p class="text-gray-600 text-xs tracking-widest font-body">
-        © 2025 <span class="text-gray-400">Gymale Surabaya</span>. All rights reserved.
+        © 2025 <span class="text-gray-400">Gymale Surabaya</span>. All rights reserved. <span class="mx-2 hidden md:inline">|</span><br class="md:hidden" /> <span class="text-gray-500">Created by HSL project</span>
       </p>
       <p class="text-gray-700 text-xs tracking-wider font-body">
         Male Only · <span class="neon-text opacity-70">House of Jawara</span>
