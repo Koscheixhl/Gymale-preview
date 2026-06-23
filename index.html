@@ -55,7 +55,7 @@
     *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
-      background-color: #1E1E1E;
+      background-color: #000000;
       color: #E5E5E5;
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 18px;
@@ -228,6 +228,32 @@
     #navbar.scrolled {
       background: rgba(20,20,20,0.97);
       box-shadow: 0 2px 20px rgba(0,0,0,0.6);
+    }
+
+    /* ---------- Cinematic Hero Sequence ---------- */
+    @keyframes cinematicText {
+      0% { opacity: 0; transform: scale(0.95); filter: blur(4px); }
+      100% { opacity: 1; transform: scale(1); filter: blur(0); }
+    }
+    @keyframes cinematicBg {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    @keyframes cinematicNav {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .animate-cine-text {
+      opacity: 0;
+      animation: cinematicText 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+    .animate-cine-bg {
+      opacity: 0;
+      animation: cinematicBg 2s ease-out 1.4s forwards;
+    }
+    .animate-cine-nav {
+      opacity: 0;
+      animation: cinematicNav 1.2s ease-out 2.2s forwards;
     }
 
     /* ---------- Entrance animations ---------- */
@@ -443,7 +469,7 @@
 <!-- ╔══════════════════════════════════════════════════════════════╗
      ║  NAVBAR                                                       ║
      ╚══════════════════════════════════════════════════════════════╝ -->
-<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-6 lg:px-16 py-4">
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-6 lg:px-16 py-4 animate-cine-nav">
   <div class="max-w-7xl mx-auto flex items-center justify-between">
 
     <!-- Logo -->
@@ -493,23 +519,16 @@
      ╚══════════════════════════════════════════════════════════════╝ -->
 <div class="relative">
   <!-- HERO BACKGROUND (Detached so Ambient wrapper can overlay it) -->
-  <div class="absolute top-0 left-0 w-full h-screen z-[-1]">
+  <div class="absolute top-0 left-0 w-full h-screen z-[-1] animate-cine-bg">
     <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('./FASILITAS/HEADER.webp');" aria-hidden="true"></div>
     <div class="absolute inset-0 hero-overlay" aria-hidden="true"></div>
     <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-neon to-transparent opacity-60" aria-hidden="true"></div>
+    
+    <!-- Feather effect at the bottom -->
+    <div class="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-black via-black/80 to-transparent" aria-hidden="true"></div>
   </div>
 
-  <div class="absolute inset-0 pointer-events-none z-0">
-    <div class="sticky top-0 left-0 w-full h-screen overflow-hidden">
-      <!-- Vignette -->
-      <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.7) 100%); z-index:0;"></div>
-      
-      <!-- Dark Cinematic Fog -->
-      <div class="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] bg-[#2a2a2a] opacity-20 rounded-full blur-[150px] animate-fog-1"></div>
-      <div class="absolute bottom-[-20%] right-[-10%] w-[70vw] h-[70vw] bg-[#1f1f1f] opacity-30 rounded-full blur-[180px] animate-fog-2"></div>
-      <div class="absolute top-[30%] left-[50%] w-[50vw] h-[50vw] bg-[#111111] opacity-40 rounded-full blur-[140px] animate-fog-3"></div>
-    </div>
-  </div>
+
 
 <!-- ╔══════════════════════════════════════════════════════════════╗
      ║  HERO SECTION                                                  ║
@@ -523,8 +542,8 @@
     <p class="section-label mb-6 fade-up">Male-Only Gym · Surabaya Timur</p>
 
     <!-- Main headline -->
-    <h1 class="font-display text-white leading-none tracking-widest mb-4 fade-up"
-        style="font-size: clamp(3.5rem, 14vw, 9rem); animation-delay: 0.1s;">
+    <h1 class="font-display text-white leading-none tracking-widest mb-4 animate-cine-text"
+        style="font-size: clamp(3.5rem, 14vw, 9rem);">
       HOUSE OF<br/>
       <span class="neon-text" style="filter: drop-shadow(0 0 28px rgba(0,229,255,0.6));">JAWARA</span>
     </h1>
@@ -537,28 +556,28 @@
     </p>
 
     <!-- CTA Buttons -->
-    <div class="flex flex-wrap justify-center gap-4 fade-up" style="animation-delay: 0.3s;">
-      <a href="#harga" class="btn-neon text-base px-8 py-3.5">
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="#harga" class="btn-neon text-base px-8 py-3.5 fade-up">
         Mulai Transformasimu
       </a>
-      <a href="#fasilitas" class="btn-outline-neon text-base px-8 py-3.5">
+      <a href="#fasilitas" class="btn-outline-neon text-base px-8 py-3.5 fade-up">
         Lihat Fasilitas
       </a>
     </div>
 
     <!-- Stats bar -->
-    <div class="mt-16 flex flex-wrap justify-center gap-8 md:gap-16 fade-up" style="animation-delay: 0.45s;">
-      <div class="text-center">
+    <div class="mt-16 flex flex-wrap justify-center gap-8 md:gap-16">
+      <div class="text-center fade-up">
         <p class="font-display neon-text text-5xl tracking-widest">3</p>
         <p class="text-gray-400 text-sm tracking-widest uppercase mt-1">Lantai Gym</p>
       </div>
-      <div class="w-px bg-gray-700 hidden md:block"></div>
-      <div class="text-center">
+      <div class="w-px bg-gray-700 hidden md:block fade-up delay-last"></div>
+      <div class="text-center fade-up">
         <p class="font-display neon-text text-5xl tracking-widest">2</p>
         <p class="text-gray-400 text-sm tracking-widest uppercase mt-1">Coach</p>
       </div>
-      <div class="w-px bg-gray-700 hidden md:block"></div>
-      <div class="text-center">
+      <div class="w-px bg-gray-700 hidden md:block fade-up delay-last"></div>
+      <div class="text-center fade-up">
         <p class="font-display neon-text text-5xl tracking-widest">100%</p>
         <p class="text-gray-400 text-sm tracking-widest uppercase mt-1">Jawara–Only</p>
       </div>
@@ -579,8 +598,8 @@
     <!-- Section header -->
     <div class="text-center mb-16 fade-up">
       <p class="section-label mb-3">Infrastruktur</p>
-      <h2 class="font-display text-white text-5xl md:text-7xl tracking-widest">
-        3 LANTAI <span class="neon-text">TERINTEGRASI</span>
+      <h2 class="font-display text-5xl md:text-7xl tracking-widest">
+        <span class="bg-gradient-to-r from-white to-[#00E5FF] text-transparent bg-clip-text drop-shadow-[0_0_15px_rgba(0,229,255,0.6)]">3 LANTAI TERINTEGRASI</span>
       </h2>
       <hr class="neon-hr max-w-xs mx-auto mt-6" />
       <p class="text-gray-400 mt-4 text-lg max-w-xl mx-auto">Dirancang untuk memaksimalkan potensi seorang Jawara!</p>
@@ -680,19 +699,40 @@
     <div class="text-center mb-16 fade-up">
       <p class="section-label mb-3">Mentoring & Coaches</p>
       <h2 class="font-display text-5xl md:text-7xl tracking-widest">
-        <span class="neon-text">JAWARA TRAINERS CLUB</span>
+        <span class="bg-gradient-to-r from-white to-[#00E5FF] text-transparent bg-clip-text drop-shadow-[0_0_15px_rgba(0,229,255,0.6)]">JAWARA TRAINERS CLUB</span>
       </h2>
       <p class="text-gray-400 mt-4 text-lg max-w-xl mx-auto">Covers all your need to become a Jawara.</p>
     </div>
 
-    <!-- Coach cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+    <!-- Coach cards - Mobile Slider / Desktop Grid -->
+    <div class="relative group max-w-4xl mx-auto -mx-6 px-6 md:mx-auto md:px-0">
+      <!-- Left button -->
+      <button id="btnPrevCoach" class="absolute -left-2 sm:-left-6 top-1/2 -translate-y-1/2 z-20 md:hidden bg-black/90 border border-[#00E5FF] text-[#00E5FF] w-10 h-10 rounded-full flex items-center justify-center shadow-[0_0_10px_#00E5FF] opacity-80 active:scale-95 transition-all" aria-label="Previous Coach">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      
+      <!-- Right button -->
+      <button id="btnNextCoach" class="absolute -right-2 sm:-right-6 top-1/2 -translate-y-1/2 z-20 md:hidden bg-black/90 border border-[#00E5FF] text-[#00E5FF] w-10 h-10 rounded-full flex items-center justify-center shadow-[0_0_10px_#00E5FF] opacity-80 active:scale-95 transition-all" aria-label="Next Coach">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+
+      <style>
+        #coachSlider::-webkit-scrollbar { display: none; }
+        #coachSlider { -ms-overflow-style: none; scrollbar-width: none; }
+        @media (max-width: 767px) {
+          #coachSlider {
+            padding-left: calc(50% - min(32.5vw, 140px));
+            padding-right: calc(50% - min(32.5vw, 140px));
+          }
+        }
+      </style>
+      <div id="coachSlider" class="-mx-6 md:mx-0 flex overflow-x-auto snap-x snap-mandatory gap-4 pb-6 pt-2 md:grid md:grid-cols-2 md:gap-8">
 
       <!-- ── Coach Rakha ── -->
-      <div class="coach-card rounded-sm overflow-hidden fade-up group" style="animation-delay: 0.1s;">
+      <div class="snap-center shrink-0 w-[65vw] max-w-[280px] md:w-auto md:max-w-none coach-card rounded-sm overflow-hidden fade-up group" style="animation-delay: 0.1s;">
         <!-- Photo Coach Rakha -->
-        <div class="relative h-80 overflow-hidden bg-[#1a1a1a]">
-          <img
+          <div class="relative h-80 overflow-hidden bg-[#1a1a1a]">
+            <img
             src="./COACHES/RAKHA/IMG_5016.JPEG"
             alt="Coach Rakha"
             class="w-full h-full object-cover object-[center_35%] transition-transform duration-500 group-hover:scale-105"
@@ -720,10 +760,10 @@
       </div>
 
       <!-- ── Coach Sahrul ── -->
-      <div class="coach-card rounded-sm overflow-hidden fade-up group" style="animation-delay: 0.2s;">
+      <div class="snap-center shrink-0 w-[65vw] max-w-[280px] md:w-auto md:max-w-none coach-card rounded-sm overflow-hidden fade-up group" style="animation-delay: 0.2s;">
         <!-- Photo Coach Sahrul -->
-        <div class="relative h-80 overflow-hidden bg-[#1a1a1a]">
-          <img
+          <div class="relative h-80 overflow-hidden bg-[#1a1a1a]">
+            <img
             src="./COACHES/SAHRUL/coach sahrul portrait.jpg.jpeg"
             alt="Coach Sahrul"
             class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
@@ -760,17 +800,44 @@
     <!-- Section header -->
     <div class="text-center mb-16 fade-up">
       <p class="section-label mb-3" style="color: #fff;">Program Unggulan</p>
-      <h2 class="font-display neon-text text-5xl md:text-7xl tracking-widest">
-        FORGE YOUR PATH
+      <h2 class="font-display text-5xl md:text-7xl tracking-widest">
+        <span class="bg-gradient-to-r from-white to-[#00E5FF] text-transparent bg-clip-text drop-shadow-[0_0_15px_rgba(0,229,255,0.6)]">FORGE YOUR PATH</span>
       </h2>
       <p class="text-gray-400 mt-4 text-lg max-w-xl mx-auto">Pilih program yang sesuai dengan tujuanmu. Setiap program dirancang khusus oleh Jawara Trainers Club.</p>
     </div>
 
-    <!-- Program cards - 4 columns -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <!-- Program cards - Mobile Slider / Desktop Grid -->
+    <div class="relative group -mx-6 px-6 md:mx-auto md:px-0">
+      <!-- Left button -->
+      <button id="btnPrevProgram" class="absolute -left-2 sm:-left-6 top-1/2 -translate-y-1/2 z-20 md:hidden bg-black/90 border border-[#00E5FF] text-[#00E5FF] w-10 h-10 rounded-full flex items-center justify-center shadow-[0_0_10px_#00E5FF] opacity-80 active:scale-95 transition-all" aria-label="Previous Program">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      
+      <!-- Right button -->
+      <button id="btnNextProgram" class="absolute -right-2 sm:-right-6 top-1/2 -translate-y-1/2 z-20 md:hidden bg-black/90 border border-[#00E5FF] text-[#00E5FF] w-10 h-10 rounded-full flex items-center justify-center shadow-[0_0_10px_#00E5FF] opacity-80 active:scale-95 transition-all" aria-label="Next Program">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+
+      <!-- Left Feather Overlay -->
+      <div class="absolute top-0 bottom-0 left-0 w-12 sm:w-20 bg-gradient-to-r from-[#000000] via-[#000000]/80 to-transparent z-10 pointer-events-none md:hidden"></div>
+      
+      <!-- Right Feather Overlay -->
+      <div class="absolute top-0 bottom-0 right-0 w-12 sm:w-20 bg-gradient-to-l from-[#000000] via-[#000000]/80 to-transparent z-10 pointer-events-none md:hidden"></div>
+
+      <style>
+        #programSlider::-webkit-scrollbar { display: none; }
+        #programSlider { -ms-overflow-style: none; scrollbar-width: none; }
+        @media (max-width: 767px) {
+          #programSlider {
+            padding-left: calc(50% - min(32.5vw, 140px));
+            padding-right: calc(50% - min(32.5vw, 140px));
+          }
+        }
+      </style>
+      <div id="programSlider" class="-mx-6 md:mx-0 flex overflow-x-auto snap-x snap-mandatory gap-4 pb-6 pt-2 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-6">
 
       <!-- ── Aesthetic Body Project ── -->
-      <div class="facility-card program-card rounded-sm overflow-hidden fade-up flex flex-col" style="animation-delay: 0.1s;">
+      <div class="snap-center shrink-0 w-[65vw] max-w-[280px] md:w-auto md:max-w-none facility-card program-card rounded-sm overflow-hidden fade-up flex flex-col" style="animation-delay: 0.1s;">
         <div class="relative overflow-hidden">
           <img src="./PROGRAM/Aesthetic.jpeg" alt="Aesthetic Body Project" class="w-full h-auto object-contain transition-transform duration-500 hover:scale-105" />
           <div class="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-transparent to-transparent"></div>
@@ -790,15 +857,16 @@
               <span class="neon-border text-neon text-[10px] tracking-wider uppercase px-2 py-0.5 rounded-sm font-body">Body Composition</span>
             </div>
           </div>
-          <a href="https://wa.me/6285955204028?text=Halo%20Admin%2C%20saya%20mau%20coba%20free%20trial%20Aesthetic%20Body%20Project%20gimana%20caranya%20ya%3F" target="_blank" rel="noopener noreferrer" class="btn-neon text-sm px-5 py-2.5 text-center w-full inline-flex items-center justify-center gap-2">
+          <a href="https://wa.me/6281358594389?text=Halo%20Admin%2C%20saya%20mau%20coba%20free%20trial%20Aesthetic%20Body%20Project%20gimana%20caranya%20ya%3F" target="_blank" rel="noopener noreferrer" class="btn-neon text-sm px-5 py-2.5 text-center w-full inline-flex items-center justify-center gap-2">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             Coba Free Trial
+          </a>
           </a>
         </div>
       </div>
 
       <!-- ── Build for Endurance ── -->
-      <div class="facility-card program-card rounded-sm overflow-hidden fade-up flex flex-col" style="animation-delay: 0.2s;">
+      <div class="snap-center shrink-0 w-[65vw] max-w-[280px] md:w-auto md:max-w-none facility-card program-card rounded-sm overflow-hidden fade-up flex flex-col" style="animation-delay: 0.2s;">
         <div class="relative overflow-hidden">
           <img src="./PROGRAM/Endurance.jpeg" alt="Build for Endurance" class="w-full h-auto object-contain transition-transform duration-500 hover:scale-105" />
           <div class="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-transparent to-transparent"></div>
@@ -816,15 +884,16 @@
               <span class="neon-border text-neon text-[10px] tracking-wider uppercase px-2 py-0.5 rounded-sm font-body">Movement Efficiency &amp; Coordination</span>
             </div>
           </div>
-          <a href="https://wa.me/6285955204028?text=Halo%20Admin%2C%20saya%20mau%20coba%20free%20trial%20Build%20for%20Endurance%20gimana%20caranya%20ya%3F" target="_blank" rel="noopener noreferrer" class="btn-neon text-sm px-5 py-2.5 text-center w-full inline-flex items-center justify-center gap-2">
+          <a href="https://wa.me/6281358594389?text=Halo%20Admin%2C%20saya%20mau%20coba%20free%20trial%20Build%20for%20Endurance%20gimana%20caranya%20ya%3F" target="_blank" rel="noopener noreferrer" class="btn-neon text-sm px-5 py-2.5 text-center w-full inline-flex items-center justify-center gap-2">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             Coba Free Trial
+          </a>
           </a>
         </div>
       </div>
 
       <!-- ── Strength for Runners ── -->
-      <div class="facility-card program-card rounded-sm overflow-hidden fade-up flex flex-col" style="animation-delay: 0.3s;">
+      <div class="snap-center shrink-0 w-[65vw] max-w-[280px] md:w-auto md:max-w-none facility-card program-card rounded-sm overflow-hidden fade-up flex flex-col" style="animation-delay: 0.3s;">
         <div class="relative overflow-hidden">
           <img src="./PROGRAM/Runner.jpeg" alt="Strength for Runners" class="w-full h-auto object-contain transition-transform duration-500 hover:scale-105" />
           <div class="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-transparent to-transparent"></div>
@@ -843,15 +912,16 @@
               <span class="neon-border text-neon text-[10px] tracking-wider uppercase px-2 py-0.5 rounded-sm font-body">Core &amp; Anti-Rotation</span>
             </div>
           </div>
-          <a href="https://wa.me/6285955204028?text=Halo%20Admin%2C%20saya%20mau%20coba%20free%20trial%20Strength%20for%20Runners%20gimana%20caranya%20ya%3F" target="_blank" rel="noopener noreferrer" class="btn-neon text-sm px-5 py-2.5 text-center w-full inline-flex items-center justify-center gap-2">
+          <a href="https://wa.me/6281358594389?text=Halo%20Admin%2C%20saya%20mau%20coba%20free%20trial%20Strength%20for%20Runners%20gimana%20caranya%20ya%3F" target="_blank" rel="noopener noreferrer" class="btn-neon text-sm px-5 py-2.5 text-center w-full inline-flex items-center justify-center gap-2">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             Coba Free Trial
+          </a>
           </a>
         </div>
       </div>
 
       <!-- ── Active 40+ ── -->
-      <div class="facility-card program-card rounded-sm overflow-hidden fade-up flex flex-col" style="animation-delay: 0.4s;">
+      <div class="snap-center shrink-0 w-[65vw] max-w-[280px] md:w-auto md:max-w-none facility-card program-card rounded-sm overflow-hidden fade-up flex flex-col" style="animation-delay: 0.4s;">
         <div class="relative overflow-hidden">
           <img src="./PROGRAM/40+.jpeg" alt="Active 40+" class="w-full h-auto object-contain transition-transform duration-500 hover:scale-105" />
           <div class="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-transparent to-transparent"></div>
@@ -869,13 +939,15 @@
               <span class="neon-border text-neon text-[10px] tracking-wider uppercase px-2 py-0.5 rounded-sm font-body">Functional Movement</span>
             </div>
           </div>
-          <a href="https://wa.me/6285955204028?text=Halo%20Admin%2C%20saya%20mau%20coba%20free%20trial%20Active%2040%2B%20gimana%20caranya%20ya%3F" target="_blank" rel="noopener noreferrer" class="btn-neon text-sm px-5 py-2.5 text-center w-full inline-flex items-center justify-center gap-2">
+          <a href="https://wa.me/6281358594389?text=Halo%20Admin%2C%20saya%20mau%20coba%20free%20trial%20Active%2040%2B%20gimana%20caranya%20ya%3F" target="_blank" rel="noopener noreferrer" class="btn-neon text-sm px-5 py-2.5 text-center w-full inline-flex items-center justify-center gap-2">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             Coba Free Trial
+          </a>
           </a>
         </div>
       </div>
 
+      </div>
     </div>
   </div>
 </section>
@@ -887,10 +959,7 @@
      ║  TESTIMONI – Suara Member Jawara                               ║
      ╚══════════════════════════════════════════════════════════════╝ -->
 <section id="testimoni" class="py-24 relative z-[1] overflow-hidden">
-  <!-- Subtle glow background -->
-  <div class="absolute inset-0 pointer-events-none overflow-hidden">
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-neon opacity-[0.025] rounded-full blur-[120px]"></div>
-  </div>
+
 
   <div class="max-w-7xl mx-auto px-6 lg:px-16 relative">
 
@@ -898,7 +967,7 @@
     <div class="text-center mb-16 fade-up">
       <p class="section-label mb-3">Bukti Nyata</p>
       <h2 class="font-display text-white text-5xl md:text-7xl tracking-widest">
-        SUARA <span class="neon-text">JAWARA</span>
+        SUARA <span class="bg-gradient-to-r from-white to-[#00E5FF] text-transparent bg-clip-text drop-shadow-[0_0_15px_rgba(0,229,255,0.6)]">JAWARA</span>
       </h2>
       <hr class="neon-hr max-w-xs mx-auto mt-6" />
       <p class="text-gray-400 mt-4 text-lg max-w-xl mx-auto">Mereka sudah membuktikan. Sekarang giliran kamu.</p>
@@ -1223,7 +1292,7 @@
     <div class="text-center mb-16 fade-up">
       <p class="section-label mb-3">Investasi</p>
       <h2 class="font-display text-white text-5xl md:text-7xl tracking-widest">
-        HARGA <span class="neon-text">TERJANGKAU</span>
+        HARGA <span class="bg-gradient-to-r from-white to-[#00E5FF] text-transparent bg-clip-text drop-shadow-[0_0_15px_rgba(0,229,255,0.6)]">TERJANGKAU</span>
       </h2>
       <p class="text-gray-400 mt-4 text-lg max-w-xl mx-auto">Transformasi serius tidak harus mahal. Pilih paket yang sesuai.</p>
     </div>
@@ -1253,7 +1322,7 @@
           <li class="flex items-center gap-3"><svg class="text-neon flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Loker Eksklusif</li>
           <li class="flex items-center gap-3 text-gray-500"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg><span class="line-through">Personal Coach (Addon)</span></li>
         </ul>
-        <a href="https://wa.me/6285955204028?text=Halo%20Admin%20Gymale!%20Saya%20mahasiswa%2Fpelajar%2C%20mau%20daftar%20membership%20untuk%20Student.%20Apa%20saja%20syarat%20yang%20perlu%20dibawa%3F" target="_blank" rel="noopener noreferrer" class="btn-neon w-full block text-center text-lg py-4">Daftar Sekarang &rarr;</a>
+        <a href="https://wa.me/6281358594389?text=Halo%20Admin%20Gymale!%20Saya%20mahasiswa%2Fpelajar%2C%20mau%20daftar%20membership%20untuk%20Student.%20Apa%20saja%20syarat%20yang%20perlu%20dibawa%3F" target="_blank" rel="noopener noreferrer" class="btn-neon w-full block text-center text-lg py-4">Daftar Sekarang &rarr;</a>
         <p class="text-gray-500 text-xs text-center mt-3 tracking-wide">*Wajib menunjukkan KTM/kartu pelajar aktif</p>
       </div>
 
@@ -1270,7 +1339,7 @@
           <div class="flex items-center justify-between bg-charcoal rounded-sm px-5 py-4 border border-gray-800"><div><p class="text-gray-400 text-sm tracking-widest uppercase">6 Bulan</p><p class="text-neon text-xs tracking-wide">~Rp 195.000/bln</p></div><div class="text-right"><p class="font-display text-white text-2xl tracking-widest">Rp 1.170.000</p></div></div>
           <div class="relative flex items-center justify-between bg-charcoal-card rounded-sm px-5 py-4 neon-border"><div class="absolute -top-3 left-4"><span class="bg-neon text-black text-xs font-body font-700 tracking-widest uppercase px-3 py-0.5 rounded-sm">Best Value</span></div><div class="mt-2"><p class="text-white font-600 text-sm tracking-widest uppercase">12 Bulan</p><p class="neon-text text-xs tracking-wide">~Rp 183.333/bln &middot; Hemat 27%</p></div><div class="text-right mt-2"><p class="font-display neon-text text-2xl tracking-widest" style="text-shadow: 0 0 12px rgba(0,229,255,0.4);">Rp 2.200.000</p></div></div>
         </div>
-        <a href="https://wa.me/6285955204028?text=Halo%20Admin%20Gymale!%20Saya%20lihat%20website%20House%20of%20Jawara%20dan%20tertarik%20untuk%20bergabung.%20Boleh%20info%20untuk%20pendaftaran%20member%20baru%3F" target="_blank" rel="noopener noreferrer" class="btn-outline-neon w-full block text-center text-lg py-4">Pilih Paket Regular &rarr;</a>
+        <a href="https://wa.me/6281358594389?text=Halo%20Admin%20Gymale!%20Saya%20lihat%20website%20House%20of%20Jawara%20dan%20tertarik%20untuk%20bergabung.%20Boleh%20info%20untuk%20pendaftaran%20member%20baru%3F" target="_blank" rel="noopener noreferrer" class="btn-outline-neon w-full block text-center text-lg py-4">Pilih Paket Regular &rarr;</a>
         <p class="text-gray-500 text-xs text-center mt-3 tracking-wide">*Harga sudah termasuk akses semua fasilitas</p>
       </div>
 
@@ -1298,24 +1367,124 @@
             <div class="flex items-center justify-between bg-charcoal rounded-sm px-5 py-3.5 border border-gray-800"><div><p class="text-white text-sm font-600 tracking-widest">4+ GYMBRO</p><p class="text-neon text-xs tracking-wide">Rp 570.000/orang</p></div><div class="text-right"><p class="font-display text-white text-xl tracking-widest">Rp 2.280.000</p></div></div>
           </div>
         </div>
-        <a href="https://wa.me/6285955204028?text=Halo%20Admin%20Gymale!%20Saya%20tertarik%20Paket%20Rame%20Rame.%20Boleh%20info%20lebih%20lanjut%3F" target="_blank" rel="noopener noreferrer" class="btn-neon w-full block text-center text-lg py-4">Daftar Bareng Temen &rarr;</a>
+        <a href="https://wa.me/6281358594389?text=Halo%20Admin%20Gymale!%20Saya%20tertarik%20Paket%20Rame%20Rame.%20Boleh%20info%20lebih%20lanjut%3F" target="_blank" rel="noopener noreferrer" class="btn-neon w-full block text-center text-lg py-4">Daftar Bareng Temen &rarr;</a>
         <p class="text-gray-500 text-xs text-center mt-3 tracking-wide">*Semua member harus daftar bersamaan</p>
       </div>
 
     </div>
-    <!-- CTA note -->
-    <p class="text-center text-gray-500 text-sm mt-10 fade-up tracking-wide">
-      Ada pertanyaan soal membership? 
-      <a href="https://wa.me/6285955204028?text=Halo%20Admin!%20Saya%20mau%20tanya-tanya%20dulu%20tentang%20program%20di%20Gymale.%20Boleh%20minta%20detailnya%3F" target="_blank" rel="noopener noreferrer" class="neon-text hover:underline">Hubungi kami via WhatsApp →</a>
-    </p>
+
 
   </div>
 </section>
 <!-- /PRICING -->
 
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  FAQ                                                           ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<section id="faq" class="py-24 px-6 lg:px-16 relative z-10">
+  <div class="max-w-4xl mx-auto">
+
+    <!-- Section header -->
+    <div class="text-center mb-16 fade-up">
+      <h2 class="font-display text-4xl md:text-6xl tracking-widest">
+        <span class="bg-gradient-to-r from-white to-[#00E5FF] text-transparent bg-clip-text drop-shadow-[0_0_15px_rgba(0,229,255,0.6)]">FREQUENTLY ASKED QUESTION</span>
+      </h2>
+    </div>
+
+    <!-- Accordion Items -->
+    <div class="space-y-4 fade-up" style="animation-delay: 0.1s;">
+      
+      <!-- Item 1 -->
+      <details class="group bg-charcoal-card border border-gray-800 rounded-sm overflow-hidden transition-all duration-300 hover:border-[#00E5FF]">
+        <summary class="flex items-center justify-between p-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden font-display text-white text-2xl tracking-widest outline-none">
+          BERAPA HARGA MEMBERSHIP?
+          <span class="transition-transform duration-300 group-open:rotate-180 text-neon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </span>
+        </summary>
+        <div class="faq-answer px-6 pb-6 text-gray-400 text-lg leading-relaxed border-t border-gray-800 pt-4 mt-2 font-body bg-[#1E1E1E] min-h-[80px]">
+          Start dari 250k untuk umum dan 230k untuk pelajar. Harga lengkap bisa cek di <a href="#harga" class="neon-text hover:underline transition-all font-600">Investasi Harga Terjangkau</a>.
+        </div>
+      </details>
+
+      <!-- Item 2 -->
+      <details class="group bg-charcoal-card border border-gray-800 rounded-sm overflow-hidden transition-all duration-300 hover:border-[#00E5FF]">
+        <summary class="flex items-center justify-between p-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden font-display text-white text-2xl tracking-widest outline-none">
+          FASILITASNYA APA AJA?
+          <span class="transition-transform duration-300 group-open:rotate-180 text-neon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </span>
+        </summary>
+        <div class="faq-answer px-6 pb-6 text-gray-400 text-lg leading-relaxed border-t border-gray-800 pt-4 mt-2 font-body bg-[#1E1E1E] min-h-[100px]">
+          Terdapat 3 lantai. Lantai 2 berfokus pada lower body &amp; Front office, Lantai 3 berfokus pada upper body, loker &amp; kamar mandi bersih, dan lantai 4 berfokus pada lapangan basket dan jawara combat space. Fasilitas lengkap bisa cek di <a href="#fasilitas" class="neon-text hover:underline transition-all font-600">3 Lantai Terintegrasi</a>.
+        </div>
+      </details>
+
+      <!-- Item 3 -->
+      <details class="group bg-charcoal-card border border-gray-800 rounded-sm overflow-hidden transition-all duration-300 hover:border-[#00E5FF]">
+        <summary class="flex items-center justify-between p-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden font-display text-white text-2xl tracking-widest outline-none">
+          APAKAH ADA PT NYA?
+          <span class="transition-transform duration-300 group-open:rotate-180 text-neon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </span>
+        </summary>
+        <div class="faq-answer px-6 pb-6 text-gray-400 text-lg leading-relaxed border-t border-gray-800 pt-4 mt-2 font-body bg-[#1E1E1E] min-h-[80px]">
+          Terdapat 2 PT pada Gymale, Coach Rakha Untuk Atletic &amp; Sport Performance Dan Coach Sahrul untuk Hypertophy &amp; weight loss. Coaching lengkap bisa di cek di <a href="#coaches" class="neon-text hover:underline transition-all font-600">Jawara Trainers Club</a>.
+        </div>
+      </details>
+
+      <!-- Item 4 -->
+      <details class="group bg-charcoal-card border border-gray-800 rounded-sm overflow-hidden transition-all duration-300 hover:border-[#00E5FF]">
+        <summary class="flex items-center justify-between p-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden font-display text-white text-2xl tracking-widest outline-none">
+          JAM OPERASIONAL?
+          <span class="transition-transform duration-300 group-open:rotate-180 text-neon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </span>
+        </summary>
+        <div class="faq-answer px-6 pb-6 text-gray-400 text-lg leading-relaxed border-t border-gray-800 pt-4 mt-2 font-body bg-[#1E1E1E] min-h-[50px]">
+          Senin - Sabtu <span class="neon-text">07.00 - 22.00</span> WIB &amp; Minggu <span class="neon-text">07.00 - 15.00</span> WIB.
+        </div>
+      </details>
+
+      <!-- Item 5 -->
+      <details class="group bg-charcoal-card border border-gray-800 rounded-sm overflow-hidden transition-all duration-300 hover:border-[#00E5FF]">
+        <summary class="flex items-center justify-between p-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden font-display text-white text-2xl tracking-widest outline-none">
+          MINIMAL UMUR BERAPA BOLEH NGEGYM?
+          <span class="transition-transform duration-300 group-open:rotate-180 text-neon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </span>
+        </summary>
+        <div class="faq-answer px-6 pb-6 text-gray-400 text-lg leading-relaxed border-t border-gray-800 pt-4 mt-2 font-body bg-[#1E1E1E] min-h-[50px]">
+          Minimal 16 tahun.
+        </div>
+      </details>
+
+    </div>
+
+    <!-- Contact Admins -->
+    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6 fade-up" style="animation-delay: 0.2s;">
+      <a href="https://wa.me/6285955204028" target="_blank" rel="noopener noreferrer" class="btn-neon text-center py-4 w-full tracking-widest font-600 text-lg font-display flex items-center justify-center gap-3">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        ADMIN 1
+      </a>
+      <a href="https://wa.me/6281358594389" target="_blank" rel="noopener noreferrer" class="btn-neon text-center py-4 w-full tracking-widest font-600 text-lg font-display shadow-[0_0_15px_#00E5FF] flex items-center justify-center gap-3">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        ADMIN 2
+      </a>
+    </div>
+
+    <!-- Notes -->
+    <p class="text-center text-gray-500 text-sm mt-6 fade-up font-body max-w-2xl mx-auto" style="animation-delay: 0.3s;">
+      Hubungi <strong class="text-white">Admin 1</strong> jika ada pertanyaan basic (jam buka, ramai atau engga?, stok suplemen apa aja?) Dan hubungi <strong class="text-white">Admin 2</strong> jika ada pertanyaan terkait (PT, Membership, Fasilitas Dll).
+    </p>
+
+  </div>
+</section>
+<!-- /FAQ -->
+
 </div>
 <!-- /SEAMLESS BACKGROUND WRAPPER -->
-
 
 <!-- ╔══════════════════════════════════════════════════════════════╗
      ║  FOOTER                                                        ║
@@ -1378,7 +1547,7 @@
             </svg>
             <div>
               <p class="text-white font-600 text-sm tracking-wide">Minggu</p>
-              <p class="font-display text-xl tracking-widest" style="color:#00E5FF; opacity:0.7;">07.00 – 14.00</p>
+              <p class="font-display text-xl tracking-widest" style="color:#00E5FF; opacity:0.7;">07.00 – 15.00</p>
               <p class="text-gray-600 text-xs tracking-widest uppercase">WIB</p>
             </div>
           </div>
@@ -1498,12 +1667,252 @@
     { threshold: 0.12 }
   );
 
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  // Exclude #hero elements so they don't trigger immediately before the cinematic sequence finishes
+  document.querySelectorAll('.fade-up:not(#hero .fade-up)').forEach(el => observer.observe(el));
 
-  /* ── Immediate trigger for hero (already visible on load) ── */
+  /* ── Cinematic trigger for hero ── */
   setTimeout(() => {
-    document.querySelectorAll('#hero .fade-up').forEach(el => el.classList.add('visible'));
-  }, 100);
+    const fadeUps = Array.from(document.querySelectorAll('#hero .fade-up'));
+    const normalFadeUps = fadeUps.filter(el => !el.classList.contains('delay-last'));
+    const lastFadeUps = fadeUps.filter(el => el.classList.contains('delay-last'));
+    
+    [...normalFadeUps, ...lastFadeUps].forEach((el, index) => {
+      el.style.transitionDelay = (index * 0.15) + 's';
+      el.classList.add('visible');
+    });
+  }, 3800);
+  /* ── FAQ Typewriting Effect ── */
+  function typewriteHTML(el, speed = 15) {
+    if (el.typewriterInterval) clearTimeout(el.typewriterInterval);
+    if (!el.hasAttribute('data-original-html')) {
+      el.setAttribute('data-original-html', el.innerHTML);
+    }
+    const html = el.getAttribute('data-original-html');
+    el.innerHTML = '';
+    let i = 0;
+    function type() {
+      if (i < html.length) {
+        let char = html.charAt(i);
+        if (char === '<') {
+          let tagEnd = html.indexOf('>', i);
+          if (tagEnd !== -1) {
+            el.innerHTML = html.substring(0, tagEnd + 1);
+            i = tagEnd + 1;
+          }
+        } else {
+          el.innerHTML = html.substring(0, i + 1);
+          i++;
+        }
+        el.typewriterInterval = setTimeout(type, speed);
+      }
+    }
+    type();
+  }
+
+  // Use 'toggle' to start the typing and close others
+  document.querySelectorAll('#faq details').forEach(detail => {
+    detail.addEventListener('toggle', function() {
+      if (this.open) {
+        // Close others and restore their original HTML
+        document.querySelectorAll('#faq details').forEach(other => {
+          if (other !== this && other.open) {
+            other.open = false;
+            const otherAnswer = other.querySelector('.faq-answer');
+            if (otherAnswer && otherAnswer.hasAttribute('data-original-html')) {
+              if (otherAnswer.typewriterInterval) clearTimeout(otherAnswer.typewriterInterval);
+              otherAnswer.innerHTML = otherAnswer.getAttribute('data-original-html');
+            }
+          }
+        });
+        const answerDiv = this.querySelector('.faq-answer');
+        typewriteHTML(answerDiv, 15);
+      } else {
+        // If closed, ensure HTML is restored for next time
+        const answerDiv = this.querySelector('.faq-answer');
+        if (answerDiv && answerDiv.hasAttribute('data-original-html')) {
+          if (answerDiv.typewriterInterval) clearTimeout(answerDiv.typewriterInterval);
+          answerDiv.innerHTML = answerDiv.getAttribute('data-original-html');
+        }
+      }
+    });
+  });
+
+  // Use 'click' to clear immediately to prevent blink
+  document.querySelectorAll('#faq summary').forEach(summary => {
+    summary.addEventListener('click', function(e) {
+      const detail = this.parentElement;
+      if (!detail.open) {
+        const answerDiv = detail.querySelector('.faq-answer');
+        if (!answerDiv.hasAttribute('data-original-html')) {
+          answerDiv.setAttribute('data-original-html', answerDiv.innerHTML);
+        }
+        if (answerDiv.typewriterInterval) clearTimeout(answerDiv.typewriterInterval);
+        answerDiv.innerHTML = ''; 
+      }
+    });
+  });
+
+  // Generic Infinite Slider Logic
+  function initInfiniteSlider(sliderId, btnPrevId, btnNextId, cardClass) {
+    const slider = document.getElementById(sliderId);
+    const btnPrev = document.getElementById(btnPrevId);
+    const btnNext = document.getElementById(btnNextId);
+
+    if (slider && btnPrev && btnNext) {
+      let cards = Array.from(slider.querySelectorAll('.' + cardClass));
+      
+      // Clone first and last cards for infinite loop effect
+      if (cards.length > 1) {
+        const firstClone = cards[0].cloneNode(true);
+        const lastClone = cards[cards.length - 1].cloneNode(true);
+        
+        // Hide clones on desktop
+        firstClone.classList.add('md:hidden');
+        lastClone.classList.add('md:hidden');
+        
+        slider.insertBefore(lastClone, slider.firstChild);
+        slider.appendChild(firstClone);
+        
+        cards = Array.from(slider.querySelectorAll('.' + cardClass));
+        let currentIndex = 1;
+        
+        // Initial scroll to real first card
+        setTimeout(() => {
+          const targetCard = cards[currentIndex];
+          slider.scrollTo({ left: targetCard.offsetLeft - (slider.clientWidth / 2) + (targetCard.clientWidth / 2), behavior: 'instant' });
+        }, 150);
+
+        const updateScroll = (newIndex) => {
+          if (!cards.length) return;
+          const targetCard = cards[newIndex];
+          slider.scrollTo({
+            left: targetCard.offsetLeft - (slider.clientWidth / 2) + (targetCard.clientWidth / 2),
+            behavior: 'smooth'
+          });
+
+          // Handle snap back silently
+          setTimeout(() => {
+            if (newIndex === 0) {
+              currentIndex = cards.length - 2;
+              const realTarget = cards[currentIndex];
+              slider.scrollTo({ left: realTarget.offsetLeft - (slider.clientWidth / 2) + (realTarget.clientWidth / 2), behavior: 'instant' });
+            } else if (newIndex === cards.length - 1) {
+              currentIndex = 1;
+              const realTarget = cards[currentIndex];
+              slider.scrollTo({ left: realTarget.offsetLeft - (slider.clientWidth / 2) + (realTarget.clientWidth / 2), behavior: 'instant' });
+            } else {
+              currentIndex = newIndex;
+            }
+          }, 350); 
+        };
+
+        btnNext.addEventListener('click', () => updateScroll(currentIndex + 1));
+        btnPrev.addEventListener('click', () => updateScroll(currentIndex - 1));
+
+        slider.addEventListener('scroll', () => {
+          clearTimeout(slider.scrollTimeout);
+          slider.scrollTimeout = setTimeout(() => {
+            let minDiff = Infinity;
+            let closestIndex = currentIndex;
+            const centerPos = slider.scrollLeft + slider.clientWidth / 2;
+            
+            cards.forEach((card, idx) => {
+              const cardCenter = card.offsetLeft + card.clientWidth / 2;
+              const diff = Math.abs(cardCenter - centerPos);
+              if (diff < minDiff) {
+                minDiff = diff;
+                closestIndex = idx;
+              }
+            });
+            
+            if (closestIndex === 0) {
+              currentIndex = cards.length - 2;
+              const realTarget = cards[currentIndex];
+              slider.scrollTo({ left: realTarget.offsetLeft - (slider.clientWidth / 2) + (realTarget.clientWidth / 2), behavior: 'instant' });
+            } else if (closestIndex === cards.length - 1) {
+              currentIndex = 1;
+              const realTarget = cards[currentIndex];
+              slider.scrollTo({ left: realTarget.offsetLeft - (slider.clientWidth / 2) + (realTarget.clientWidth / 2), behavior: 'instant' });
+            } else {
+              currentIndex = closestIndex;
+            }
+          }, 150);
+        });
+      }
+    }
+  }
+
+  // Simple Slider Logic (No Loop)
+  function initSimpleSlider(sliderId, btnPrevId, btnNextId, cardClass) {
+    const slider = document.getElementById(sliderId);
+    const btnPrev = document.getElementById(btnPrevId);
+    const btnNext = document.getElementById(btnNextId);
+
+    if (slider && btnPrev && btnNext) {
+      const cards = Array.from(slider.querySelectorAll('.' + cardClass));
+      if (!cards.length) return;
+
+      const updateButtons = () => {
+        const scrollLeft = slider.scrollLeft;
+        const maxScroll = slider.scrollWidth - slider.clientWidth;
+        
+        if (scrollLeft <= 10) {
+          btnPrev.style.opacity = '0.3';
+          btnPrev.style.pointerEvents = 'none';
+        } else {
+          btnPrev.style.opacity = '0.8';
+          btnPrev.style.pointerEvents = 'auto';
+        }
+
+        if (scrollLeft >= maxScroll - 10) {
+          btnNext.style.opacity = '0.3';
+          btnNext.style.pointerEvents = 'none';
+        } else {
+          btnNext.style.opacity = '0.8';
+          btnNext.style.pointerEvents = 'auto';
+        }
+      };
+
+      // Initial state
+      setTimeout(updateButtons, 100);
+      slider.addEventListener('scroll', () => {
+        clearTimeout(slider.btnTimeout);
+        slider.btnTimeout = setTimeout(updateButtons, 50);
+      });
+
+      const scrollToCard = (index) => {
+        if (index < 0 || index >= cards.length) return;
+        const targetCard = cards[index];
+        slider.scrollTo({
+          left: targetCard.offsetLeft - (slider.clientWidth / 2) + (targetCard.clientWidth / 2),
+          behavior: 'smooth'
+        });
+      };
+
+      btnNext.addEventListener('click', () => {
+        let currentIndex = 0;
+        const centerPos = slider.scrollLeft + slider.clientWidth / 2;
+        cards.forEach((card, idx) => {
+          if (card.offsetLeft + card.clientWidth / 2 <= centerPos + 10) currentIndex = idx;
+        });
+        scrollToCard(currentIndex + 1);
+      });
+
+      btnPrev.addEventListener('click', () => {
+        let currentIndex = cards.length - 1;
+        const centerPos = slider.scrollLeft + slider.clientWidth / 2;
+        cards.slice().reverse().forEach((card, reverseIdx) => {
+          const idx = cards.length - 1 - reverseIdx;
+          if (card.offsetLeft + card.clientWidth / 2 >= centerPos - 10) currentIndex = idx;
+        });
+        scrollToCard(currentIndex - 1);
+      });
+    }
+  }
+
+  // Init Sliders
+  initInfiniteSlider('programSlider', 'btnPrevProgram', 'btnNextProgram', 'program-card');
+  initSimpleSlider('coachSlider', 'btnPrevCoach', 'btnNextCoach', 'coach-card');
 </script>
 
 </body>
